@@ -1,6 +1,6 @@
 // LOOK, PRETTY CIRCLES
 // Max size of circle when user goes fast
-tool.maxDistance = 50;
+tool.maxDistance = 100;
 // Returns an object specifying a semi-random color
 function randomColor() {
   return {
