@@ -1,0 +1,11 @@
+{
+  "name": "whiteboard",
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "express": "3.0.x",
+    "jade": "*",
+    "socket.io": "0.9.x"
+  }
+}
