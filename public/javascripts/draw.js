@@ -49,21 +49,21 @@ io.on( 'drawCircle', function( data ) {
 //var myPath;
 //
 //function onMouseDown(event) {
-//	drawLine();
-//	emitLine();
+//	drawLine(myPath);
+//	emitLine(myPath);
 //}
 //
 //function onMouseDrag(event) {
 //	myPath.add(event.point);
 //}
 //
-//function drawLine() {
+//function drawLine(myPath) {
 //  myPath = new Path();
 //  myPath.strokeColor = 'black';
 //  view.draw();
 //}
 //
-//function emitLine(){
+//function emitLine(myPath){
 //  var sessionId = io.socket.sessionid;
 //  var data = {
 //    myPath;
@@ -73,6 +73,7 @@ io.on( 'drawCircle', function( data ) {
 //}
 //
 //io.on( 'drawLine', function( data ) {
-//  drawCircle();
+//  console
+//  drawCircle(myPath);
 //})
 
