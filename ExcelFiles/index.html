@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<script src="/socket.io/socket.io.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+  <body>
+    <form id="load" action="">
+      <input id="m" autocomplete="off" /> <button> Load</button>
+    </form>
+    <table id="spreadsheet">
+    </table>
+    <form id="list" action="" >
+      <button>List</button>
+    </form>
+    <ul id="files_list">
+    </ul>
+  </body>
+
+
+<script>
+  var rawsheet;
+  var currentCell;
+  var socket = io();
+  $('#load').submit(function(){
+    socket.emit('update', $('#m').val(), currentCell);
+    return false;
+  });
+  $('#list').submit(function(){
+    socket.emit('list', 'list');
+    return false;
+  });
+  socket.on('message',function(msg){
+    var tb;
+    var tr;
+    var row;
+    $('#spreadsheet').html("") ;
+    for (var i = 0; i < msg.length; ++i){
+      tr = $('<tr>');
+      row = msg[i];
+      for(var j = 0; j < row.length; ++j){
+      tr.append("<td><input id="+String(i)+'-'+String(j)+" value="+row[j]+"></td>");       
+      }
+      tr.append("</tr>");
+      $('#spreadsheet').append(tr);
+    }
+    $('#spreadsheet > tbody > tr > td > input').on("click", function(){
+      console.log($(this).attr('id'));
+      currentCell = $(this).attr('id').split("-");
+      $('#m').val(rawsheet[currentCell[0]][currentCell[1]]);
+    });
+  });
+  socket.on('rawsheet', function(msg){
+    rawsheet = msg;
+  });
+  socket.on('list', function(msg){
+    var li;
+    $('#files_list').html(""); 
+    for(var i = 0; i < msg.length; ++i){
+      li = $('<li>');
+      li.append("<button id="+msg[i].id+'>'+msg[i].name+'</button>');
+      li.append("</li>");
+      $('#files_list').append(li);
+    }
+    $('#files_list > li > button').on( "click", function(){
+      socket.emit('change_to_id', $(this).attr('id'));
+    });
+  });
+
+</script>
+  
+</html>
+
