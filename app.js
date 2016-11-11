@@ -42,16 +42,16 @@ io.sockets.on('connection', function (socket) {
 
   });
 
-//  socket.on( 'drawCircle', function( data, session ) {
-//    console.log( "session " + session + " drew:");
-//    console.log( data );
-//    socket.broadcast.emit( 'drawCircle', data );
-//  });
+  socket.on( 'drawCircle', function( data, session ) {
+    console.log( "session " + session + " drew:");
+    console.log( data );
+    socket.broadcast.emit( 'drawCircle', data );
+  });
 
-  socket.on( 'onMouseDown', function( data, session ) {
-      console.log( "session " + session + " drew:");
-      console.log( data );
-      socket.broadcast.emit( 'onMouseDown', data );
-    });
+//  socket.on( 'onMouseDown', function( data, session ) {
+//      console.log( "session " + session + " drew:");
+//      console.log( data );
+//      socket.broadcast.emit( 'onMouseDown', data );
+//    });
 
 });
