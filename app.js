@@ -70,22 +70,18 @@ var io = require('socket.io').listen( server );
 
 io.sockets.on('connection', function (socket) {
   socket.on('ping', function ( data ) {
-    console.log('socket: server recieves ping (2)');
     io.sockets.emit( 'pong', data );
-    console.log('socket: server sends pong to all (3)');
-
   });
 
-  socket.on( 'drawCircle', function( data, session ) {
-    console.log( "session " + session + " drew:");
-    console.log( data );
-    socket.broadcast.emit( 'drawCircle', data );
-  });
+//  socket.on( 'drawCircle', function( data, session ) {
+//    console.log( "session " + session + " drew:");
+//    console.log( "YAY A CIRCLE" );
+//    socket.broadcast.emit( 'drawCircle', data );
+//  });
 
-//  socket.on( 'drawLine', function( data, session ) {
-//      //console.log( "session " + session + " drew:");
-//      //console.log( data );
-//      socket.broadcast.emit( 'onMouseDown', data );
-//    });
+  socket.on( 'onMouseDrag', function( data, session ) {
+      console.log( "onMouseDrag is happening");
+      socket.broadcast.emit( 'onMouseDrag', data );
+    });
 
 });
