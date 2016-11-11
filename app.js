@@ -12,7 +12,6 @@ var app = express();
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
   app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
@@ -42,16 +41,16 @@ io.sockets.on('connection', function (socket) {
 
   });
 
-//  socket.on( 'drawCircle', function( data, session ) {
-//    console.log( "session " + session + " drew:");
-//    console.log( data );
-//    socket.broadcast.emit( 'drawCircle', data );
-//  });
+  socket.on( 'drawCircle', function( data, session ) {
+    console.log( "session " + session + " drew:");
+    console.log( data );
+    socket.broadcast.emit( 'drawCircle', data );
+  });
 
-  socket.on( 'drawLine', function( data, session ) {
-      //console.log( "session " + session + " drew:");
-      //console.log( data );
-      socket.broadcast.emit( 'onMouseDown', data );
-    });
+//  socket.on( 'drawLine', function( data, session ) {
+//      //console.log( "session " + session + " drew:");
+//      //console.log( data );
+//      socket.broadcast.emit( 'onMouseDown', data );
+//    });
 
 });
