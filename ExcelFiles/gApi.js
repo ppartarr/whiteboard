@@ -7,7 +7,7 @@ var readline = require('readline');
 var google = require('googleapis');
 var googleAuth = require('google-auth-library');
 var HashMap = require('hashmap');
-var Q = require('q');
+
 
 
 var main = require(__dirname+'/quickstart.js');

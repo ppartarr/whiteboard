@@ -1,9 +1,12 @@
 {
   "name": "excel",
   "version": "0.0.1",
-  "description": "excel parsing", 
+  "description": "excel parsing",
   "dependencies": {
     "express": "~4.10.2",
-    "socket.io": "~1.5.1"
+    "socket.io": "~1.5.1",
+    "googleapis": "~14.2.0",
+    "google-auth-library": "~0.9.9",
+    "hashmap": "~2.0.6"
   }
 }
