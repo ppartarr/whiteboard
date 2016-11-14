@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-// LOOK, PRETTY CIRCLES
-// Max size of circle when user goes fast
-tool.maxDistance = 100;
-// Returns an object specifying a semi-random color
-function randomColor() {
-  return {
-    red: 0,
-    green: Math.random(),
-    blue: Math.random(),
-    alpha: ( Math.random() * 0.25 ) + 0.05
-  };
-=======
 //// LOOK, PRETTY CIRCLES!
 //// Max size of circle when user goes fast
 //tool.maxDistance = 50;
@@ -62,32 +49,32 @@ var myPath;
 function onMouseDown(event) {
 	myPath = new Path();
 	myPath.strokeColor = 'black';
->>>>>>> 4967520968384fe0209b33c2b140d6fd7cf1f8b1
 }
 
 function onMouseDrag(event) {
-	myPath.add(event.point);
-	view.draw();
-	drawLine(myPath);
-	emitLine(myPath);
+	//myPath.add(event.point);
+	//view.draw();
+    //var x = event.x;
+    //var y = event.y;
+    var myPoint = event.point;
+	drawLine(myPoint);
+	emitLine(myPoint);
 }
 
-
-function drawLine(myPath) {
-  this.myPath.add(event.point);
+function drawLine(myPoint) {
+  myPath.add(myPoint);
   view.draw();
 }
 
-function emitLine(myPath){
+function emitLine(myPoint){
   var sessionId = io.socket.sessionid;
   var data = {
-    myPath: myPath
+    myPoint: myPoint
   };
   io.emit('onMouseDrag', data, sessionId)
-  console.log(data);
 }
 
 io.on( 'onMouseDrag', function( data ) {
-  drawLine(myPath);
+  drawLine(data.myPoint);
 })
 
