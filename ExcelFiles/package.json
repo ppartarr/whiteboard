@@ -4,9 +4,10 @@
   "description": "excel parsing",
   "dependencies": {
     "express": "~4.10.2",
-    "socket.io": "~1.5.1",
-    "googleapis": "~14.2.0",
     "google-auth-library": "~0.9.9",
-    "hashmap": "~2.0.6"
+    "googleapis": "~14.2.0",
+    "hashmap": "~2.0.6",
+    "q": "^1.4.1",
+    "socket.io": "~1.5.1"
   }
 }
