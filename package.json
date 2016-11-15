@@ -4,6 +4,7 @@
     "start": "node app"
   },
   "dependencies": {
+    "bootstrap": "3.x",
     "express": "3.0.x",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",

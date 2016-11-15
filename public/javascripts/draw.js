@@ -65,7 +65,7 @@ $(function(){
     });
 
     // Keep users screen up to date with other users cursors & lines
-    io.on('moving', function (data) {
+    io('moving', function (data) {
 //         Create cursor
         if ( !(data.id in clients) )
         {
@@ -93,7 +93,7 @@ $(function(){
         }
 
         // Save state
-        clients[data.id] = data;
-        clients[data.id].updated = $.now();
+//        clients[data.id] = data;
+//        clients[data.id].updated = $.now();
     });
 });
