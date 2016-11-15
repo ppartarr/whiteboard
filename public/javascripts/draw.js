@@ -1,80 +1,99 @@
-//// LOOK, PRETTY CIRCLES!
-//// Max size of circle when user goes fast
-//tool.maxDistance = 50;
-//// Returns an object specifying a semi-random color
-//function randomColor() {
-//  return {
-//    red: 0,
-//    green: Math.random(),
-//    blue: Math.random(),
-//    alpha: ( Math.random() * 0.25 ) + 0.05
-//  };
-//}
-//
-//function onMouseDrag(event) {
-//  var x = event.middlePoint.x;
-//  var y = event.middlePoint.y;
-//  var radius = event.delta.length / 2;
-//  var color = randomColor();
-//  drawCircle( x, y, radius, color );
-//  emitCircle( x, y, radius, color );
-//}
-//
-//
-//function drawCircle( x, y, radius, color ) {
-//  var circle = new Path.Circle( new Point( x, y ), radius );
-//  circle.fillColor = new RgbColor( color.red, color.green, color.blue, color.alpha );
-//  view.draw();
-//}
-//
-//function emitCircle( x, y, radius, color ) {
-//  var sessionId = io.socket.sessionid;
-//  var data = {
-//    x: x,
-//    y: y,
-//    radius: radius,
-//    color: color
-//  };
-//  io.emit( 'drawCircle', data, sessionId )
-//  console.log( data )
-//}
-//
-//io.on( 'drawCircle', function( data ) {
-//  drawCircle( data.x, data.y, data.radius, data.color );
-//})
+$(function(){
 
-// DRAW A LINE
-var myPath;
+    // Configuration
+    //var url = 'http://127.0.0.1'; // URL of your webserver
+    var line_thickness = 7;
+    var line_colour = "blue";
 
-function onMouseDown(event) {
-	myPath = new Path();
-	myPath.strokeColor = 'black';
-}
+    // Variables
+    var canvas = $('#draw');
+    var ctx = canvas[0].getContext('2d');
+    var id = Math.round($.now() * Math.random()); // Generate a unique ID
+    var drawing = false; // A flag for drawing activity
+    var clients = {};
+    var cursors = {};
+    var prev = {}; // Previous coordinates container
+    //var socket = io.connect(url);
+    var lastEmit = $.now();
 
-function onMouseDrag(event) {
-	//myPath.add(event.point);
-	//view.draw();
-    //var x = event.x;
-    //var y = event.y;
-    var myPoint = event.point;
-	drawLine(myPoint);
-	emitLine(myPoint);
-}
+    // Drawing helper function
+    function drawLine(fromx, fromy, tox, toy)
+    {
+        ctx.lineWidth = line_thickness;
+        ctx.strokeStyle = line_colour;
+        ctx.lineCap = "round";
+        ctx.beginPath();
+        ctx.moveTo(fromx, fromy);
+        ctx.lineTo(tox, toy);
+        ctx.stroke();
+    }
 
-function drawLine(myPoint) {
-  myPath.add(myPoint);
-  view.draw();
-}
+    // On mouse down
+    canvas.on('mousedown', function(e) {
+        e.preventDefault();
+        drawing = true;
+        prev.x = e.pageX;
+        prev.y = e.pageY;
+    });
 
-function emitLine(myPoint){
-  var sessionId = io.socket.sessionid;
-  var data = {
-    myPoint: myPoint
-  };
-  io.emit('onMouseDrag', data, sessionId)
-}
+    // On mouse move
+    canvas.on('mousemove', function(e) {
+        // Emit the event to the server
+        if ($.now() - lastEmit > 30)
+        {
+            io.emit('mousemove', {
+                'x': e.pageX,
+                'y': e.pageY,
+                'drawing': drawing,
+                'id': id
+            });
+            lastEmit = $.now();
+        }
 
-io.on( 'onMouseDrag', function( data ) {
-  drawLine(data.myPoint);
-})
+        // Draw a line for the current user's movement
+        if (drawing)
+        {
+            drawLine(prev.x, prev.y, e.pageX, e.pageY);
+            prev.x = e.pageX;
+            prev.y = e.pageY;
+        }
+    });
 
+    // On mouse up
+    canvas.on('mouseup mouseleave', function(e) {
+        drawing = false;
+    });
+
+    // Keep users screen up to date with other users cursors & lines
+    io.on('moving', function (data) {
+//         Create cursor
+        if ( !(data.id in clients) )
+        {
+            cursors[data.id] = $('<div class="cursor">').appendTo('#cursors');
+        }
+
+        // Move cursor
+        cursors[data.id].css({
+            'left' : data.x,
+            'top' : data.y
+        });
+
+        // Set the starting point to where the user first touched
+        if (data.drawing && clients[data.id] && data.touch)
+        {
+            clients[data.id].x = data.startX;
+            clients[data.id].y = data.startY;
+        }
+
+        // Show drawing
+        if (data.drawing && clients[data.id])
+        {
+            // clients[data.id] holds the previous position of this user's mouse pointer
+            drawLine(clients[data.id].x, clients[data.id].y, data.x, data.y);
+        }
+
+        // Save state
+        clients[data.id] = data;
+        clients[data.id].updated = $.now();
+    });
+});

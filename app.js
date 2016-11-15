@@ -68,20 +68,23 @@ passport.use(new LocalStrategy({
 var server = http.createServer(app).listen( app.get('port') );
 var io = require('socket.io').listen( server );
 
-io.sockets.on('connection', function (socket) {
-  socket.on('ping', function ( data ) {
-    io.sockets.emit( 'pong', data );
-  });
 
+// Disable messages
+//io.set('log level', 1);
+
+io.sockets.on('connection', function (socket) {
+//  socket.on('ping', function ( data ) {
+//    io.sockets.emit( 'pong', data );
+//  });
+//
 //  socket.on( 'drawCircle', function( data, session ) {
 //    console.log( "session " + session + " drew:");
 //    console.log( "YAY A CIRCLE" );
 //    socket.broadcast.emit( 'drawCircle', data );
 //  });
 
-  socket.on( 'onMouseDrag', function( data, session ) {
-      console.log( "onMouseDrag is happening");
-      socket.broadcast.emit( 'onMouseDrag', data );
+  socket.on( 'mousemove', function( data, session ) {
+      socket.broadcast.emit( 'moving', data );
     });
 
 });

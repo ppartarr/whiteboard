@@ -6,22 +6,24 @@
 <head>
 	<title>Whiteboard</title>
 	<link rel='stylesheet' href='/stylesheets/style.css' />
-	<script src="/socket.io/socket.io.js"></script>
-	<script src="/javascripts/socket.js"></script>
-	<script src="/javascripts/paper.js"></script>
 </head>
 
 <body>
-	<ul class="navigation">
-		<li><a href="/">Home</a></li>
-		<li><a href="#">About</a></li>
-	</ul>
-	<h1 class = "container">Welcome to our Fantastically Wonderful not at all buggy whiteboard</h1>
-	<div style="padding:0">
-		<a href="/users">Click here to login</a>
-	</div>
+	<!--<ul class="navigation">-->
+		<!--<li><a href="/">Home</a></li>-->
+		<!--<li><a href="#">About</a></li>-->
+	<!--</ul>-->
+	<!--<h1 class = "container">Welcome to our Fantastically Wonderful not at all buggy whiteboard</h1>-->
+	<!--<div style="padding:0">-->
+		<!--<a href="/users">Click here to login</a>-->
+	<!--</div>-->
+	<div id="cursors"></div>
 	<canvas id="draw" resize="true" keepalive="true"></canvas>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/javascripts/socket.js"></script>
+	<script src="/javascripts/paper.js"></script>
 	<script type="text/paperscript" src="javascripts/draw.js" canvas="draw"></script>
+	<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
 </body>
 
 </html>
