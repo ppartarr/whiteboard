@@ -33,6 +33,12 @@ io.on('connection', function(socket){
   socket.on('message', function(msg){
     gApi.loadSheet(); 
   });
+  socket.on('row', function(msg){
+    gApi.addRow(msg);
+  });
+  socket.on('col', function(msg){
+    gApi.addCol(msg);
+  });
   socket.on('list', function(msg){
     gApi.listSheet();
   });

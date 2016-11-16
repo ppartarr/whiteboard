@@ -19,6 +19,29 @@ var nameIdMap = new HashMap();
 
 var cellLocation;
 var cellValue;
+
+var rowLocation;
+var row;
+
+this.addRow = function(rowSize){
+  row = []
+  for(var i = 0; i < rowSize; ++i){
+    row.push(" ");
+  }
+  rowLocation = spreadsheets.get(spreadID).length+1;
+  console.log(row, rowLocation);
+  getJSON(fs, addRow);
+}
+this.addCol = function(rowSize){
+  row = []
+  for(var i = 0; i < rowSize+1; ++i){
+    row.push(" ");
+  }
+  rowLocation = spreadsheets.get(spreadID).length;
+  console.log(row, rowLocation);
+  getJSON(fs, addRow);
+}
+
 this.updateCell = function(value, address){
   cellLocation = String.fromCharCode(65+parseInt(address[1], 10))+(++address[0]);
   cellValue = value;
@@ -152,7 +175,7 @@ function loadS(auth) {
   sheets.spreadsheets.values.get({
     auth: auth,
     spreadsheetId: spreadID,
-    range: 'Sheet1!A:E',
+    range: 'Sheet1',
   }, function(err, response) {
     if (err) {
       console.log('The API returned an error: ' + err);
@@ -172,7 +195,7 @@ function loadRawS(auth) {
   sheets.spreadsheets.values.get({
     auth: auth,
     spreadsheetId: spreadID,
-    range: 'Sheet1!A:E',
+    range: 'Sheet1',
     valueRenderOption: "FORMULA",
 }, function(err, response){
     if(err){
@@ -183,10 +206,31 @@ function loadRawS(auth) {
     if(rows.length == 0){
       console.log("No data found");
     } else{
-      rawSpreadsheets.set(spreadID, rows);
+      rawSpreadsheets.set(spreadID, rows); 
       main.newRawSheet();
     }
 })};
+
+
+function addRow(auth){
+  var sheets = google.sheets('v4');
+  sheets.spreadsheets.values.update({
+  auth: auth,
+  spreadsheetId: spreadID,
+  range: 'Sheet1!'+rowLocation+':'+rowLocation,
+  resource: {
+    range: 'Sheet1!'+rowLocation+':'+rowLocation,
+    values: [row],
+  },
+  valueInputOption: "USER_ENTERED",
+}, function(err, response){
+    if(err){
+      console.log("Error" + err);
+      return;
+    }
+    loadS(auth);
+})};
+
 
 function updateCell(auth){
   var sheets = google.sheets('v4');
