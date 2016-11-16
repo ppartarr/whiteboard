@@ -84,6 +84,13 @@ a:hover{
     background: url('pointer.png') no-repeat -4px 0;
 }
 
+#cursors .custom {
+  position: absolute;
+  width: 15px;
+  height: 22px;
+  background: url('eraser.png') no-repeat -4px 0;
+}
+
 .container {
   display: flex;
   max-width: 85%;

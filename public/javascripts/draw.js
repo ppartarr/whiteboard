@@ -20,6 +20,7 @@ $(function(){
         if (erase){
           ctx.lineWidth = 20;
           ctx.strokeStyle = "white";
+          ctx.style.cursor=styleCursor;
         }
         else{
           ctx.lineWidth = thickness;

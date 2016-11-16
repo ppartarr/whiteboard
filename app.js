@@ -4,7 +4,7 @@ var express = require('express'),
     io = require('socket.io')(server);
 
 
-server.listen(3000);
+server.listen(8000);
 
 app.use(express.static('public'));
 
