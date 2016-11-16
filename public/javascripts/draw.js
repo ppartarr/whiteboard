@@ -92,7 +92,10 @@ $(function(){
                                         y:data.y[i],
                                         id:data.id[i],
                                         drawing:data.drawing[i],
-			}
+					color:data.color[i],
+					thickness:data.thickness[i],
+					erase:data.erase[i],
+		}
 			processData(converted);
 		}
 	}

@@ -18,7 +18,10 @@ var initialCanvas = {
       x: [],
       y: [],
       drawing: [],
-      id: []
+      id: [],
+      color: [],
+      thickness: [],
+      erase: [],
 };
 
 io.on('connection', function (socket) {
@@ -28,6 +31,9 @@ io.on('connection', function (socket) {
       initialCanvas.y.push(data.y);
       initialCanvas.drawing.push(data.drawing);
       initialCanvas.id.push(data.id);
+      initialCanvas.thickness.push(data.thickness);
+      initialCanvas.erase.push(data.erase);
+      initialCanvas.color.push(data.color);
       socket.broadcast.emit( 'moving', data );
     });
 
