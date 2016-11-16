@@ -10,7 +10,7 @@ var HashMap = require('hashmap');
 
 
 
-var main = require(__dirname+'/quickstart.js');
+var main = require(__dirname+'/app.js');
 
 
 var spreadsheets = new HashMap();
