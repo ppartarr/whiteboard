@@ -16,14 +16,14 @@ $(function(){
     var lastEmit = $.now();
 
     // Drawing helper function=
-    function drawLine(fromx, fromy, tox, toy, color){
+    function drawLine(fromx, fromy, tox, toy, color, thickness){
         var erase = document.getElementById("erase");
         if (erase.checked){
           ctx.lineWidth = 20;
           ctx.strokeStyle = "white";
         }
         else{
-          ctx.lineWidth = document.getElementById("thickness").value;
+          ctx.lineWidth = thickness;
           ctx.strokeStyle = color;
           //ctx.strokeStyle = document.getElementById("colorPicker").value;
         }
@@ -54,7 +54,8 @@ $(function(){
                 'y': e.pageY,
                 'drawing': drawing,
                 'id': id,
-                'color': document.getElementById("colorPicker").value
+                'color': document.getElementById("colorPicker").value,
+                'thickness': document.getElementById("thickness").value
             });
             lastEmit = $.now();
         }
@@ -64,7 +65,7 @@ $(function(){
         {
             e.pageX = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
             e.pageY = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
-            drawLine(prev.x, prev.y, e.pageX, e.pageY, document.getElementById("colorPicker").value);
+            drawLine(prev.x, prev.y, e.pageX, e.pageY, document.getElementById("colorPicker").value,document.getElementById("thickness").value);
             prev.x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
             prev.y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
 
@@ -93,7 +94,7 @@ $(function(){
                                         drawing:data.drawing[i],
 			}
 			processData(converted);
-		}	
+		}
 	}
     });
 
@@ -132,7 +133,7 @@ function processData(data) {
         if (data.drawing && clients[data.id])
         {
             // clients[data.id] holds the previous position of this user's mouse pointer
-            drawLine(clients[data.id].x, clients[data.id].y, data.x, data.y, data.color);
+            drawLine(clients[data.id].x, clients[data.id].y, data.x, data.y, data.color, data.thickness);
         }
 
 //         Save state
