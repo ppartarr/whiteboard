@@ -3,7 +3,6 @@ $(function(){
     // Configuration
     var url = 'http://localhost'; // URL of your webserver
     var line_thickness = 7;
-    var line_colour = "blue";
 
     // Variables
     var canvas = $('#draw');
@@ -16,6 +15,10 @@ $(function(){
     var socket = io.connect(url);
     var lastEmit = $.now();
 
+    function setColour(){
+          line_colour = document.getElementById("test").value;
+        }
+
     socket.on('news', function (data){
         console.log("here");
     })
@@ -24,7 +27,7 @@ $(function(){
     function drawLine(fromx, fromy, tox, toy)
     {
         ctx.lineWidth = line_thickness;
-        ctx.strokeStyle = line_colour;
+        ctx.strokeStyle = document.getElementById("test").value;
         ctx.lineCap = "round";
         ctx.beginPath();
         ctx.moveTo(fromx, fromy);
