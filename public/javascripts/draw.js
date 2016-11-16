@@ -22,10 +22,17 @@ $(function(){
 
 
     // Drawing helper function=
-    function drawLine(fromx, fromy, tox, toy)
-    {
-        ctx.lineWidth = document.getElementById("thickness").value;
-        ctx.strokeStyle = document.getElementById("colorPicker").value;
+    function drawLine(fromx, fromy, tox, toy){
+        var check = document.getElementById("erase");
+        if (check.checked){
+          ctx.lineWidth = 20;
+          ctx.strokeStyle = "white";
+        }
+        else{
+          ctx.lineWidth = document.getElementById("thickness").value;
+          ctx.strokeStyle = document.getElementById("colorPicker").value;
+        }
+
         ctx.lineCap = "round";
         ctx.beginPath();
         ctx.moveTo(fromx, fromy);
