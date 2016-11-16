@@ -23,7 +23,7 @@ $(function(){
     function drawLine(fromx, fromy, tox, toy)
     {
         ctx.lineWidth = document.getElementById("thickness").value;
-        ctx.strokeStyle = document.getElementById("test").value;
+        ctx.strokeStyle = document.getElementById("colorPicker").value;
         ctx.lineCap = "round";
         ctx.beginPath();
         ctx.moveTo(fromx, fromy);
