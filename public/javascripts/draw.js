@@ -1,7 +1,7 @@
 $(function(){
 
     // Configuration
-    //var url = 'http://127.0.0.1'; // URL of your webserver
+    var url = 'http://localhost'; // URL of your webserver
     var line_thickness = 7;
     var line_colour = "blue";
 
@@ -13,10 +13,14 @@ $(function(){
     var clients = {};
     var cursors = {};
     var prev = {}; // Previous coordinates container
-    //var socket = io.connect(url);
+    var socket = io.connect(url);
     var lastEmit = $.now();
 
-    // Drawing helper function
+    socket.on('news', function (data){
+        console.log("here");
+    })
+
+    // Drawing helper function=
     function drawLine(fromx, fromy, tox, toy)
     {
         ctx.lineWidth = line_thickness;
@@ -41,7 +45,7 @@ $(function(){
         // Emit the event to the server
         if ($.now() - lastEmit > 30)
         {
-            io.emit('mousemove', {
+            socket.emit('mousemove', {
                 'x': e.pageX,
                 'y': e.pageY,
                 'drawing': drawing,
@@ -65,7 +69,7 @@ $(function(){
     });
 
     // Keep users screen up to date with other users cursors & lines
-    io('moving', function (data) {
+    socket.on('moving', function (data) {
 //         Create cursor
         if ( !(data.id in clients) )
         {
@@ -92,8 +96,9 @@ $(function(){
             drawLine(clients[data.id].x, clients[data.id].y, data.x, data.y);
         }
 
-        // Save state
-//        clients[data.id] = data;
-//        clients[data.id].updated = $.now();
-    });
+//         Save state
+        clients[data.id] = data;
+        clients[data.id].updated = $.now();
+    })
+
 });
