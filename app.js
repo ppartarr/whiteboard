@@ -51,7 +51,7 @@ app.get('/excel.html', function(req, res){
 
 io.on('connection', function(socket){
   socket.on('message', function(msg){
-    gApi.loadSheet(); 
+    gApi.loadSheet();
   });
   socket.on('row', function(msg){
     gApi.addRow(msg);

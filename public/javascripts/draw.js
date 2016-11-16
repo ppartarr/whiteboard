@@ -15,12 +15,8 @@ $(function(){
     var socket = io.connect(url);
     var lastEmit = $.now();
 
-    function setColour(){
-          line_colour = document.getElementById("test").value;
-        }
-
     // Drawing helper function=
-    function drawLine(fromx, fromy, tox, toy){
+    function drawLine(fromx, fromy, tox, toy, color){
         var erase = document.getElementById("erase");
         if (erase.checked){
           ctx.lineWidth = 20;
@@ -28,7 +24,8 @@ $(function(){
         }
         else{
           ctx.lineWidth = document.getElementById("thickness").value;
-          ctx.strokeStyle = document.getElementById("colorPicker").value;
+          ctx.strokeStyle = color;
+          //ctx.strokeStyle = document.getElementById("colorPicker").value;
         }
         ctx.lineCap = "round";
         ctx.beginPath();
@@ -56,7 +53,8 @@ $(function(){
                 'x': e.pageX,
                 'y': e.pageY,
                 'drawing': drawing,
-                'id': id
+                'id': id,
+                'color': document.getElementById("colorPicker").value
             });
             lastEmit = $.now();
         }
@@ -66,7 +64,7 @@ $(function(){
         {
             e.pageX = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
             e.pageY = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
-            drawLine(prev.x, prev.y, e.pageX, e.pageY);
+            drawLine(prev.x, prev.y, e.pageX, e.pageY, document.getElementById("colorPicker").value);
             prev.x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
             prev.y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
 
@@ -104,7 +102,7 @@ $(function(){
         if (data.drawing && clients[data.id])
         {
             // clients[data.id] holds the previous position of this user's mouse pointer
-            drawLine(clients[data.id].x, clients[data.id].y, data.x, data.y);
+            drawLine(clients[data.id].x, clients[data.id].y, data.x, data.y, data.color);
         }
 
 //         Save state
