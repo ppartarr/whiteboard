@@ -16,9 +16,8 @@ $(function(){
     var lastEmit = $.now();
 
     // Drawing helper function=
-    function drawLine(fromx, fromy, tox, toy, color, thickness){
-        var erase = document.getElementById("erase");
-        if (erase.checked){
+    function drawLine(fromx, fromy, tox, toy, color, thickness, erase){
+        if (erase){
           ctx.lineWidth = 20;
           ctx.strokeStyle = "white";
         }
@@ -55,7 +54,8 @@ $(function(){
                 'drawing': drawing,
                 'id': id,
                 'color': document.getElementById("colorPicker").value,
-                'thickness': document.getElementById("thickness").value
+                'thickness': document.getElementById("thickness").value,
+                'erase' : document.getElementById("erase").checked
             });
             lastEmit = $.now();
         }
@@ -65,7 +65,7 @@ $(function(){
         {
             e.pageX = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
             e.pageY = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
-            drawLine(prev.x, prev.y, e.pageX, e.pageY, document.getElementById("colorPicker").value,document.getElementById("thickness").value);
+            drawLine(prev.x, prev.y, e.pageX, e.pageY, document.getElementById("colorPicker").value, document.getElementById("thickness").value, document.getElementById("erase").checked);
             prev.x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
             prev.y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
 
@@ -133,7 +133,7 @@ function processData(data) {
         if (data.drawing && clients[data.id])
         {
             // clients[data.id] holds the previous position of this user's mouse pointer
-            drawLine(clients[data.id].x, clients[data.id].y, data.x, data.y, data.color, data.thickness);
+            drawLine(clients[data.id].x, clients[data.id].y, data.x, data.y, data.color, data.thickness, data.erase);
         }
 
 //         Save state
