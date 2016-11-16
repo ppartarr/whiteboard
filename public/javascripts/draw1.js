@@ -20,16 +20,10 @@ $(function(){
         }
 
     // Drawing helper function=
-    function drawLine(fromx, fromy, tox, toy){
-        var erase = document.getElementById("erase");
-        if (erase.checked){
-          ctx.lineWidth = 20;
-          ctx.strokeStyle = "white";
-        }
-        else{
-          ctx.lineWidth = document.getElementById("thickness").value;
-          ctx.strokeStyle = document.getElementById("colorPicker").value;
-        }
+    function drawLine(fromx, fromy, tox, toy)
+    {
+        ctx.lineWidth = document.getElementById("thickness").value;
+        ctx.strokeStyle = document.getElementById("colorPicker").value;
         ctx.lineCap = "round";
         ctx.beginPath();
         ctx.moveTo(fromx, fromy);
@@ -41,35 +35,31 @@ $(function(){
     canvas.on('mousedown', function(e) {
         e.preventDefault();
         drawing = true;
-        canoffset = $(canvas).offset();
-        prev.x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
-        prev.y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
+        prev.x = e.pageX;
+        prev.y = e.pageY;
     });
 
 
     // On mouse move
     canvas.on('mousemove', function(e) {
+	if(drawing){
         // Emit the event to the server
-        if ($.now() - lastEmit > 30)
-        {
-            socket.emit('mousemove', {
-                'x': e.pageX,
-                'y': e.pageY,
-                'drawing': drawing,
-                'id': id
-            });
-            lastEmit = $.now();
-        }
+          if ($.now() - lastEmit > 30)
+          {
+              socket.emit('mousemove', {
+                  'x': e.pageX,
+                  'y': e.pageY,
+                  'drawing': drawing,
+                  'id': id
+              });
+              console.log('mousemove');
+              lastEmit = $.now();
+          }
 
         // Draw a line for the current user's movement
-        if (drawing)
-        {
-            e.pageX = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
-            e.pageY = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
             drawLine(prev.x, prev.y, e.pageX, e.pageY);
-            prev.x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
-            prev.y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
-
+            prev.x = e.pageX;
+            prev.y = e.pageY;
         }
     });
 
@@ -77,14 +67,10 @@ $(function(){
     canvas.on('mouseup mouseleave', function(e) {
         drawing = false;
     });
-
-    // Keep users screen up to date with other users cursors & lines
-    socket.on('moving', function(data){
-      processData(data);
-    });
-
+    
 
     socket.on('loadInitial', function(data){
+        console.log("enters");
         var converted;
 	if(data.x.length>0){
 		for(var i = 0; i<data.x.length ; ++i){
@@ -94,20 +80,16 @@ $(function(){
                                         id:data.id[i],
                                         drawing:data.drawing[i],
 			}
+			console.log(converted);
 			processData(converted);
 		}	
 	}
     });
-
-    download.addEventListener("click", function() {
-        var canvas = document.getElementById("draw");
-          var imgData = canvas.toDataURL();
-          var pdf = new jsPDF();
-          pdf.addImage(imgData, 'JPEG', 0, 0);
-          var download = document.getElementById('download');
-
-          pdf.save("download.pdf");
+    // Keep users screen up to date with other users cursors & lines
+    socket.on('moving', function(data){
+	processData(data);
     });
+
 
 function processData(data) {
         console.log('moving');
@@ -141,5 +123,5 @@ function processData(data) {
         clients[data.id] = data;
         clients[data.id].updated = $.now();
     }
-
 });
+
