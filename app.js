@@ -42,6 +42,7 @@ server.listen(3000);
 
 
 app.use(express.static('public'));
+
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');
 });
@@ -51,7 +52,7 @@ app.get('/', function(req, res) {
 //io.set('log level', 1);
 
 io.on('connection', function (socket) {
-
+  console.log('connected');
   socket.on( 'mousemove', function( data, session ) {
       socket.broadcast.emit( 'moving', data );
     });

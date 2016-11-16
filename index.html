@@ -17,10 +17,7 @@
 				<a class="navbar-brand" href="#">whiteboard</a>
 			</div>
 			<div class="btn-group">
-				<button class="btn btn-default dropdown-toggle navbar-btn" data-toggle="dropdown">
-					<span class="glyphicon glyphicon-stop" style="color: blue;"></span>
-					<span class="caret"></span>
-				</button>
+				<input id="colorPicker" type="color">
 			</div>
 		</div>
 	</nav>
@@ -35,11 +32,11 @@
 	<!--</div>-->
 
 	<div id="cursors"></div>
-	<canvas id="draw" resize="true" keepalive="true"></canvas>
-	<script src="/javascripts/socket.js"></script>
-	<script src="/javascripts/paper.js"></script>
-	<script type="text/paperscript" src="javascripts/draw.js" canvas="draw"></script>
+	<div><canvas id="draw" resize="true" keepalive="true"></canvas></div>
+	<script src="javascripts/socket.js"></script>
+	<script src="javascripts/paper.js"></script>
 	<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+	<script type="text/paperscript" src="javascripts/draw.js" canvas="draw"></script>
 </body>
 
 </html>

@@ -19,15 +19,11 @@ $(function(){
           line_colour = document.getElementById("test").value;
         }
 
-    socket.on('news', function (data){
-        console.log("here");
-    })
-
     // Drawing helper function=
     function drawLine(fromx, fromy, tox, toy)
     {
         ctx.lineWidth = line_thickness;
-        ctx.strokeStyle = document.getElementById("test").value;
+        ctx.strokeStyle = document.getElementById("colorPicker").value;
         ctx.lineCap = "round";
         ctx.beginPath();
         ctx.moveTo(fromx, fromy);
@@ -54,6 +50,7 @@ $(function(){
                 'drawing': drawing,
                 'id': id
             });
+            console.log('mousemove');
             lastEmit = $.now();
         }
 
@@ -73,6 +70,7 @@ $(function(){
 
     // Keep users screen up to date with other users cursors & lines
     socket.on('moving', function (data) {
+        console.log('moving');
 //         Create cursor
         if ( !(data.id in clients) )
         {
