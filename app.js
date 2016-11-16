@@ -12,9 +12,22 @@ app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
+
+
+var initialCanvas = {
+      x: [],
+      y: [],
+      drawing: [],
+      id: []
+};
+
 io.on('connection', function (socket) {
-  console.log('connected');
+  socket.emit('loadInitial', initialCanvas);
   socket.on( 'mousemove', function( data, session ) {
+      initialCanvas.x.push(data.x);
+      initialCanvas.y.push(data.y);
+      initialCanvas.drawing.push(data.drawing);
+      initialCanvas.id.push(data.id);
       socket.broadcast.emit( 'moving', data );
     });
 
@@ -54,7 +67,7 @@ server.listen(3000);
 
 io.on('connection', function(socket){
   socket.on('message', function(msg){
-    gApi.loadSheet(); 
+    gApi.loadSheet();
   });
   socket.on('row', function(msg){
     gApi.addRow(msg);
