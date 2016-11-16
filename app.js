@@ -13,7 +13,6 @@ app.get('/', function(req, res) {
 });
 
 io.on('connection', function (socket) {
-  console.log('connected');
   socket.on( 'mousemove', function( data, session ) {
       socket.broadcast.emit( 'moving', data );
     });

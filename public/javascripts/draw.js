@@ -19,8 +19,6 @@ $(function(){
           line_colour = document.getElementById("test").value;
         }
 
-
-
     // Drawing helper function=
     function drawLine(fromx, fromy, tox, toy){
         var erase = document.getElementById("erase");
@@ -32,7 +30,6 @@ $(function(){
           ctx.lineWidth = document.getElementById("thickness").value;
           ctx.strokeStyle = document.getElementById("colorPicker").value;
         }
-
         ctx.lineCap = "round";
         ctx.beginPath();
         ctx.moveTo(fromx, fromy);
@@ -61,7 +58,6 @@ $(function(){
                 'drawing': drawing,
                 'id': id
             });
-            console.log('mousemove');
             lastEmit = $.now();
         }
 
@@ -115,5 +111,15 @@ $(function(){
         clients[data.id] = data;
         clients[data.id].updated = $.now();
     })
+
+    download.addEventListener("click", function() {
+        var canvas = document.getElementById("draw");
+          var imgData = canvas.toDataURL();
+          var pdf = new jsPDF();
+          pdf.addImage(imgData, 'JPEG', 0, 0);
+          var download = document.getElementById('download');
+
+          pdf.save("download.pdf");
+    });
 
 });
