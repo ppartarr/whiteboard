@@ -23,8 +23,8 @@ $(function(){
 
     // Drawing helper function=
     function drawLine(fromx, fromy, tox, toy){
-        var check = document.getElementById("erase");
-        if (check.checked){
+        var erase = document.getElementById("erase");
+        if (erase.checked){
           ctx.lineWidth = 20;
           ctx.strokeStyle = "white";
         }
