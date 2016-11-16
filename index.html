@@ -6,6 +6,7 @@
 <script src="/socket.io/socket.io.js"></script>
 
 <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<title>Whiteboard</title>
 </head>
 
@@ -19,6 +20,9 @@
 			</div>
 			<div class="btn-group">
 				<input id="colorPicker" type="color">
+				<p style="color:white;">thickness</p>
+				<input id="thickness" type="range" max="12">
+				<input id="erase" type="checkbox"><p style="color:white;">erase</p>
 			</div>
 		</div>
 	</nav>
