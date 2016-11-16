@@ -2,7 +2,7 @@
 <html>
 
 <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" media="screen" />
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css" media="screen" />
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
 
@@ -19,6 +19,19 @@
 				<a class="navbar-brand" href="excel.html"> Excel Sheets </a>
 			</div>
 			<div class="btn-group">
+				<div class="color">
+					<input id="colorPicker"type="color">
+
+				</div>
+				<div class="thickness">
+					<p>thickness</p>
+					<input id="thickness" class="slideTwo" type="range" max="12">
+				</div>
+				<div class="erase">
+					<p>erase</p>
+					<input class="slideThree" id="erase" type="checkbox">
+				</div>
+				<br style"clear:both;">
 				<input id="colorPicker" type="color">
 				<p style="color:white;">thickness</p>
 				<input id="thickness" type="range" max="12">

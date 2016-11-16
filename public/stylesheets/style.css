@@ -6,6 +6,54 @@ h2 {
   display: inline;
 }
 
+a:hover{
+  color:red;
+}
+
+.btn-group{
+  color: white;
+}
+
+.color{
+  float: left;
+  padding-top: 25pt;
+  padding-left :150pt;
+  padding-right: 20pt;
+}
+
+.thickness{
+  font-size: 16pt;
+  text-align: center;
+  float:left;
+  padding: 5pt;
+  padding-left:20pt;
+  padding-right: 20pt;
+}
+
+.erase{
+  font-size: 16pt;
+  text-align: center;
+  vertical-align:middle;
+  padding: 5pt;
+  float: left;
+  padding-left:20pt;
+  padding-right: 20pt;
+}
+
+.slideThree {
+  width: 80px;
+  height: 26px;
+  background: white;
+  margin: 20px auto;
+  position: relative;
+  border-radius: 50px;
+}
+
+#draw {
+    height: 100%;
+    width: 100%;
+}
+
 #cursors {
     position: relative;
 }
@@ -25,16 +73,16 @@ h2 {
 
 .navigation {
   list-style: none;
-  margin: 0; 
-  
-  background: #38c792;
-  
+  margin: 0;
+
+  background: white;
+
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  
+
   -webkit-flex-flow: row wrap;
   justify-content: flex-start;
 }
@@ -47,7 +95,7 @@ h2 {
 }
 
 .navigation a:hover {
-  background: darken(deepskyblue, 2%);
+  background: white;
 }
 
 .title {
