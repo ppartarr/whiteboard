@@ -2,8 +2,8 @@
 <html>
 
 <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" media="screen" />
-<link rel="stylesheet" type="text/css" href="bootstrap.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" media="screen" />
+<script src="/socket.io/socket.io.js"></script>
 
 <head>
 	<title>Whiteboard</title>
@@ -18,11 +18,7 @@
 				<a class="navbar-brand" href="/excel.html"> Excel Sheets </a>
 			</div>
 			<div class="btn-group">
-				<button class="btn btn-default dropdown-toggle navbar-btn" data-toggle="dropdown">
-					<span class="glyphicon glyphicon-stop" style="color: blue;"></span>
-					<span class="caret"></span>
-				</button>
-					<input id="test" type="color">
+				<input id="colorPicker" type="color">
 			</div>
 		</div>
 	</nav>
@@ -35,13 +31,13 @@
 	<!--<div style="padding:0">-->
 		<!--<a href="/users">Click here to login</a>-->
 	<!--</div>-->
+
 	<div id="cursors"></div>
 	<div><canvas id="draw" resize="true" keepalive="true"></canvas></div>
-	<script src="/socket.io/socket.io.js"></script>
-	<script src="/javascripts/socket.js"></script>
-	<script src="/javascripts/paper.js"></script>
-	<script type="text/paperscript" src="javascripts/draw.js" canvas="draw"></script>
+	<script src="javascripts/socket.js"></script>
+	<script src="javascripts/paper.js"></script>
 	<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+	<script type="text/paperscript" src="javascripts/draw.js" canvas="draw"></script>
 </body>
 
 </html>
