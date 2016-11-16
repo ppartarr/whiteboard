@@ -36,7 +36,7 @@
     <form id="list" action="">
       <button type="submit" class="btn btn-default">List</button>
     </form>
-    <ul id="files_list">
+    <ul class = "list-group" id="files_list">
     </ul>
   </div>
 </body>
@@ -101,8 +101,8 @@
     var li;
     $('#files_list').html("");
     for(var i = 0; i < msg.length; ++i){
-      li = $('<li>');
-      li.append("<button id="+msg[i].id+'>'+msg[i].name+'</button>');
+      li = $('<li class = \"list-group-item list-group-item-action\" >');
+      li.append("<button class=\"btn btn-default\" id="+msg[i].id+'>'+msg[i].name+'</button>');
       li.append("</li>");
       $('#files_list').append(li);
     }
