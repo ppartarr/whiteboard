@@ -5,10 +5,10 @@
   },
   "dependencies": {
     "bootstrap": "3.x",
-    "express": "3.0.x",
+    "express": "4.14.x",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "passport-local": "^1.0.0",
-    "socket.io": "0.9.x"
+    "socket.io": "1.0"
   }
 }
