@@ -6,11 +6,6 @@ h2 {
   display: inline;
 }
 
-#draw {
-    height: 100%;
-    width: 100%;
-}
-
 #cursors {
     position: relative;
 }
