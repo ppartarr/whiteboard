@@ -25,7 +25,7 @@ $(function(){
     // Drawing helper function
     function drawLine(fromx, fromy, tox, toy)
     {
-        ctx.lineWidth = line_thickness;
+        ctx.lineWidth = document.getElementById("thickness").value;
         ctx.strokeStyle = document.getElementById("test").value;
         ctx.lineCap = "round";
         ctx.beginPath();
@@ -41,6 +41,7 @@ $(function(){
         prev.x = e.pageX;
         prev.y = e.pageY;
     });
+
 
     // On mouse move
     canvas.on('mousemove', function(e) {
