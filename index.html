@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" media="screen" />
+<script src="/socket.io/socket.io.js"></script>
+
+<head>
+	<title>Whiteboard</title>
+</head>
+
+<body>
+
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">whiteboard</a>
+			</div>
+			<div class="btn-group">
+				<button class="btn btn-default dropdown-toggle navbar-btn" data-toggle="dropdown">
+					<span class="glyphicon glyphicon-stop" style="color: blue;"></span>
+					<span class="caret"></span>
+				</button>
+			</div>
+		</div>
+	</nav>
+
+	<!--<ul class="navigation">-->
+		<!--<li><a href="/">Home</a></li>-->
+		<!--<li><a href="#">About</a></li>-->
+	<!--</ul>-->
+	<!--<h1 class = "container">Welcome to our Fantastically Wonderful not at all buggy whiteboard</h1>-->
+	<!--<div style="padding:0">-->
+		<!--<a href="/users">Click here to login</a>-->
+	<!--</div>-->
+
+	<div id="cursors"></div>
+	<canvas id="draw" resize="true" keepalive="true"></canvas>
+	<script src="/javascripts/socket.js"></script>
+	<script src="/javascripts/paper.js"></script>
+	<script type="text/paperscript" src="javascripts/draw.js" canvas="draw"></script>
+	<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+</body>
+
+</html>
