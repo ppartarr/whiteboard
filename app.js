@@ -12,8 +12,6 @@ app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
-
-
 var initialCanvas = {
       x: [],
       y: [],
@@ -23,6 +21,7 @@ var initialCanvas = {
       thickness: [],
       erase: [],
 };
+
 
 io.on('connection', function (socket) {
   socket.emit('loadInitial', initialCanvas);
@@ -56,7 +55,6 @@ var gApi = require(__dirname+'/gApi.js');
 
 this.list = function(){
   io.emit('list', gApi.getList());
-  console.log("entered list");
 }
 this.newSheet = function(){
   io.emit('message', gApi.getSheet());
@@ -69,11 +67,10 @@ app.get('/excel.html', function(req, res){
   res.sendFile(__dirname+'/excel.html');
 });
 
-server.listen(3000);
 
 io.on('connection', function(socket){
   socket.on('message', function(msg){
-    gApi.loadSheet();
+    gApi.loadSheet(); 
   });
   socket.on('row', function(msg){
     gApi.addRow(msg);
