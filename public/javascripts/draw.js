@@ -19,6 +19,8 @@ $(function(){
           line_colour = document.getElementById("test").value;
         }
 
+
+
     // Drawing helper function=
     function drawLine(fromx, fromy, tox, toy){
         var check = document.getElementById("erase");
@@ -42,8 +44,9 @@ $(function(){
     canvas.on('mousedown', function(e) {
         e.preventDefault();
         drawing = true;
-        prev.x = e.pageX;
-        prev.y = e.pageY;
+        canoffset = $(canvas).offset();
+        prev.x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
+        prev.y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
     });
 
 
@@ -65,9 +68,12 @@ $(function(){
         // Draw a line for the current user's movement
         if (drawing)
         {
+            e.pageX = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
+            e.pageY = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
             drawLine(prev.x, prev.y, e.pageX, e.pageY);
-            prev.x = e.pageX;
-            prev.y = e.pageY;
+            prev.x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
+            prev.y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
+
         }
     });
 
