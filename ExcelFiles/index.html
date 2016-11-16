@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" media="screen"
+  />
+</head>
 <script src="/socket.io/socket.io.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-  <body>
-    <form id="load" action="">
-      <input id="m" autocomplete="off" /> <button> Load</button>
-    </form>
-    <form id="row">
-      <button> New Row</button>
-    </form>
-    <form id="col">
-      <button> New Column</button>
-    </form>
-    <table id="spreadsheet">
-    </table>
-    <form id="list" action="" >
-      <button>List</button>
+
+<body>
+  <div class="container">
+    <div class="btn-group">
+      <h1> Welcome to Excel Sheets </h1>
+      <form id="load" action="">
+        <input id="m" autocomplete="off" /> <button type="button" class="btn btn-default"> Load</button>
+      </form>
+      <form id="row">
+        <button type="button" class="btn btn-default"> New Row</button>
+      </form>
+      <form id="col">
+        <button type="button" class="btn btn-default"> New Column</button>
+      </form>
+    </div>
+    <table id="spreadsheet"> </table>
+    <form id="list" action="">
+      <button type = "button" class = "btn btn-default">List</button>
     </form>
     <ul id="files_list">
     </ul>
-  </body>
+  </div>
+</body>
 
 
 <script>
@@ -92,6 +102,5 @@
   });
 
 </script>
-  
-</html>
 
+</html>
