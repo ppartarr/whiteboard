@@ -105,8 +105,6 @@ $(function(){
     // var socket = io();
 
     socket.on('loadChat', function(storedMsgs){
-        console.log(storedMsgs);
-        console.log("hui");
         for (var message in storedMsgs) {
             printMessage(storedMsgs[message]);
         }
