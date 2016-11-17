@@ -40,6 +40,15 @@
     <ul class = "list-group" id="files_list">
     </ul>
   </div>
+  <div id="chat" class="well col-md-2">
+    <ul id="messages" class="list-group"></ul>
+    <form action="" class="input-group">
+      <input id="m2" class="form-control" autocomplete="off" />
+      <span class="input-group-btn">
+					<button class="btn btn-default">Send</button>
+				</span>
+    </form>
+  </div>
 </body>
 
 
@@ -111,6 +120,33 @@
       socket.emit('change_to_id', $(this).attr('id'));
     });
   });
+
+  //chat
+  // var socket = io();
+
+  socket.on('loadChat', function(storedMsgs){
+      console.log(storedMsgs);
+      console.log("hui");
+      for (var message in storedMsgs) {
+          printMessage(storedMsgs[message]);
+      }
+  });
+  $('form').submit(function(){
+      socket.emit('chat message', $('#m2').val());
+      $('#m2').val('');
+      return false;
+  });
+  socket.on('chat message', function(msg){
+      printMessage(msg);
+  });
+
+  //printMessage
+  var printMessage = function(msg){
+      $('#messages').append($('<li class="list-group-item">').text(msg));
+      $('#messages').scrollTop($('#messages')[0].scrollHeight);
+  };
+
+
 
 </script>
 

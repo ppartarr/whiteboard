@@ -126,17 +126,27 @@ a:hover{
 }
 
 #chat {
-  position: absolute;
+  background-color: #0962a1;
+  position: fixed;
   bottom: 0;
   right: 0;
 }
 
 #messages {
+  min-height: 80vh;
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 60vh;
+  max-height: 80vh;
 }
 
 li.list-group-item {
   word-wrap: break-word;
+  border-radius: 20px;
+  margin-top: 5px;
+}
+li.list-group-item:first-child {
+  border-radius: 20px;
+}
+li.list-group-item:last-child {
+  border-radius: 20px;
 }

@@ -103,15 +103,30 @@ $(function(){
 
     //chat
     // var socket = io();
+
+    socket.on('loadChat', function(storedMsgs){
+        console.log(storedMsgs);
+        console.log("hui");
+        for (var message in storedMsgs) {
+            printMessage(storedMsgs[message]);
+        }
+    });
     $('form').submit(function(){
         socket.emit('chat message', $('#m').val());
         $('#m').val('');
         return false;
     });
     socket.on('chat message', function(msg){
+        printMessage(msg);
+    });
+
+    //printMessage
+    var printMessage = function(msg){
         $('#messages').append($('<li class="list-group-item">').text(msg));
         $('#messages').scrollTop($('#messages')[0].scrollHeight);
-    });
+    };
+
+
 
 
     download.addEventListener("click", function() {

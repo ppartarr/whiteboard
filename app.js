@@ -1,3 +1,5 @@
+var storedMsgs = [];
+
 var express = require('express'),
     app = express(),
     server = require('http').Server(app),
@@ -25,6 +27,7 @@ var initialCanvas = {
 
 io.on('connection', function (socket) {
   socket.emit('loadInitial', initialCanvas);
+  socket.emit('loadChat', storedMsgs);
   socket.on( 'mousemove', function( data, session ) {
       initialCanvas.x.push(data.x);
       initialCanvas.y.push(data.y);
@@ -36,8 +39,9 @@ io.on('connection', function (socket) {
       socket.broadcast.emit( 'moving', data );
     });
   socket.on('chat message', function(msg){
-        io.emit('chat message', msg);
-    });
+      storedMsgs.push(msg);
+      io.emit('chat message', msg);
+  });
 
 });
 
