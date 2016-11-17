@@ -100,6 +100,5 @@ app.get('/login.html', function(req, res){
 
 io.on('connection', function(socket){
   socket.on('login', function(msg,username){
-    document.write(2);
   });
 });
