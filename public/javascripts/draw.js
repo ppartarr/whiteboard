@@ -116,6 +116,7 @@ $(function(){
         $('#m').val('');
         return false;
     });
+    
     socket.on('chat message', function(msg){
         printMessage(msg);
     });
@@ -125,7 +126,6 @@ $(function(){
         $('#messages').append($('<li class="list-group-item">').text(msg));
         $('#messages').scrollTop($('#messages')[0].scrollHeight);
     };
-
 
 
 

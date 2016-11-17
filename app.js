@@ -6,7 +6,7 @@ var express = require('express'),
     io = require('socket.io')(server);
 
 
-server.listen(3005);
+server.listen(3000);
 
 app.use(express.static('public'));
 
@@ -77,7 +77,7 @@ app.get('/excel.html', function(req, res){
 
 io.on('connection', function(socket){
   socket.on('message', function(msg){
-    gApi.loadSheet(); 
+    gApi.loadSheet();
   });
   socket.on('row', function(msg){
     gApi.addRow(msg);
@@ -93,5 +93,16 @@ io.on('connection', function(socket){
   });
   socket.on('update', function(value, address){
     gApi.updateCell(value, address);
+  });
+});
+
+//------------------login stuff------------------------------------------
+
+app.get('/login.html', function(req, res){
+  res.sendFile(__dirname+'/login.html');
+});
+
+io.on('connection', function(socket){
+  socket.on('login', function(msg,username){
   });
 });
