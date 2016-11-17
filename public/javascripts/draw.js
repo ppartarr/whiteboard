@@ -12,7 +12,7 @@ $(function(){
     var clients = {};
     var cursors = {};
     var prev = {}; // Previous coordinates container
-    var socket = io.connect(url);
+    var socket = io();
     var lastEmit = $.now();
 
     // Drawing helper function=
@@ -20,7 +20,6 @@ $(function(){
         if (erase){
           ctx.lineWidth = 20;
           ctx.strokeStyle = "white";
-          ctx.style.cursor=styleCursor;
         }
         else{
           ctx.lineWidth = thickness;
@@ -86,21 +85,34 @@ $(function(){
 
     socket.on('loadInitial', function(data){
         var converted;
-	if(data.x.length>0){
-		for(var i = 0; i<data.x.length ; ++i){
-			converted = {
-					x:data.x[i],
-                                        y:data.y[i],
-                                        id:data.id[i],
-                                        drawing:data.drawing[i],
-					color:data.color[i],
-					thickness:data.thickness[i],
-					erase:data.erase[i],
-		}
-			processData(converted);
-		}
-	}
+        if(data.x.length>0){
+            for(var i = 0; i<data.x.length ; ++i){
+                converted = {
+                        x:data.x[i],
+                                            y:data.y[i],
+                                            id:data.id[i],
+                                            drawing:data.drawing[i],
+                        color:data.color[i],
+                        thickness:data.thickness[i],
+                        erase:data.erase[i],
+            }
+                processData(converted);
+            }
+        }
     });
+
+    //chat
+    // var socket = io();
+    $('form').submit(function(){
+        socket.emit('chat message', $('#m').val());
+        $('#m').val('');
+        return false;
+    });
+    socket.on('chat message', function(msg){
+        $('#messages').append($('<li class="list-group-item">').text(msg));
+        $('#messages').scrollTop($('#messages')[0].scrollHeight);
+    });
+
 
     download.addEventListener("click", function() {
         var canvas = document.getElementById("draw");

@@ -4,7 +4,7 @@ var express = require('express'),
     io = require('socket.io')(server);
 
 
-server.listen(8000);
+server.listen(3005);
 
 app.use(express.static('public'));
 
@@ -34,6 +34,9 @@ io.on('connection', function (socket) {
       initialCanvas.erase.push(data.erase);
       initialCanvas.color.push(data.color);
       socket.broadcast.emit( 'moving', data );
+    });
+  socket.on('chat message', function(msg){
+        io.emit('chat message', msg);
     });
 
 });

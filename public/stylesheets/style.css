@@ -1,5 +1,6 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-color: white;
 }
 
 h2 {
@@ -11,30 +12,26 @@ a:hover{
 }
 
 .btn-group{
-  color: white;
+  font-size:12px;
 }
 
 .color{
   float: left;
-  padding-top: 25pt;
-  padding-left :150pt;
+  padding-top: 10pt;
+  padding-left :20pt;
   padding-right: 20pt;
 }
 
 .thickness{
-  font-size: 16pt;
   text-align: center;
   float:left;
-  padding: 5pt;
   padding-left:20pt;
   padding-right: 20pt;
 }
 
 .erase{
-  font-size: 16pt;
   text-align: center;
   vertical-align:middle;
-  padding: 5pt;
   float: left;
   padding-left:20pt;
   padding-right: 20pt;
@@ -43,8 +40,7 @@ a:hover{
 .download{
   float: left;
   color: black;
-  padding-top: 15pt;
-  font-size: 16pt;
+  padding-top: 5pt;
   padding-left:20pt;
   padding-right: 20pt;
 }
@@ -60,12 +56,8 @@ a:hover{
 }
 
 .slideThree {
-  width: 80px;
-  height: 26px;
+  width: 70px;
   background: white;
-  margin: 20px auto;
-  position: relative;
-  border-radius: 50px;
 }
 
 #draw {
@@ -81,15 +73,15 @@ a:hover{
     position: absolute;
     width: 15px;
     height: 22px;
-    background: url('pointer.png') no-repeat -4px 0;
+    background: url('../../pointer.png') no-repeat -4px 0;
 }
 
-#cursors .custom {
-  position: absolute;
-  width: 15px;
-  height: 22px;
-  background: url('eraser.png') no-repeat -4px 0;
-}
+/*#cursors .custom {*/
+  /*position: absolute;*/
+  /*width: 15px;*/
+  /*height: 22px;*/
+  /*background: url('../../eraser.png') no-repeat -4px 0;*/
+/*}*/
 
 .container {
   display: flex;
@@ -121,14 +113,30 @@ a:hover{
 }
 
 .navigation a:hover {
-  background: white;
+  background: grey;
 }
 
 .title {
   color: white;
-  float: center;
+  float:none;
   padding: 15px 15px;
   display: flex;
   justify-content: center;
   font-size: 35px;
+}
+
+#chat {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+#messages {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 60vh;
+}
+
+li.list-group-item {
+  word-wrap: break-word;
 }
