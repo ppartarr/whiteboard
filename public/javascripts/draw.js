@@ -108,11 +108,11 @@ $(function(){
         $('#m').val('');
         return false;
     });
+    
     socket.on('chat message', function(msg){
         $('#messages').append($('<li class="list-group-item">').text(msg));
         $('#messages').scrollTop($('#messages')[0].scrollHeight);
     });
-
 
     download.addEventListener("click", function() {
         var canvas = document.getElementById("draw");
