@@ -129,7 +129,7 @@
           printMessage(storedMsgs[message]);
       }
   });
-  $('form').submit(function(){
+  $('#chat > form').submit(function(){
       socket.emit('chat message', $('#m2').val());
       $('#m2').val('');
       return false;
