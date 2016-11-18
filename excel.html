@@ -100,7 +100,7 @@
       $('#spreadsheet').append(tr);
     }
     $('#spreadsheet > tbody > tr > td > input').on("click", function(){
-
+      $('#m').focus();
       currentCell = $(this).attr('id').split("-");
       $('#m').val(rawsheet[currentCell[0]][currentCell[1]]);
     });
