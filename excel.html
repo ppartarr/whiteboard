@@ -8,37 +8,50 @@
   <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css" media="screen" />
   <script src="/socket.io/socket.io.js"></script>
   <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+  <title> Sheets </title>
 </head>
+
 <body>
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="/">Whiteboard</a>
         <a class="navbar-brand" href="#"> Excel Sheets </a>
+        <div class="col-md-2">
+          <form id="row">
+            <button type="submit" class="btn btn-secondary"> New Row</button>
+          </form>
+        </div>
+        <div class="col-md-2">
+          <form id="col">
+            <button type="submit" class="btn btn-secondary"> New Col</button>
+          </form>
+        </div>
+        <div class="col-md-2">
+          <form id="list" action="">
+            <button type="submit" class="btn btn-secondary">List</button>
+          </form>
+
+        </div>
       </div>
       <div class="btn-group">
       </div>
     </div>
   </nav>
   <div class="container-fluid">
-    <h1 id ="welcome"> Welcome to Sheets </h1>
+    <h1 id="welcome"> Welcome to Sheets </h1>
     <div class="btn-group">
-      <form id="load" action="">
-        <input id="m" autocomplete="off" /> <button type="submit" class="btn btn-primary"> Load</button>
-      </form>
-      <form id="row">
-        <button type="submit" class="btn btn-primary"> New Row</button>
-      </form>
-      <form id="col">
-        <button type="submit" class="btn btn-primary"> New Column</button>
-      </form>
+      <div class="col-md-4">
+        <form id="load" action="">
+          <input id="m" autocomplete="off" /> <button type="submit" class="btn btn-primary"> Load</button>
+        </form>
+      </div>
+      <div class="pull-right">
+        <ul class="list-group" id="files_list" style = "list-style: none">
+        </ul>
+      </div>
     </div>
     <table id="spreadsheet"> </table>
-    <form id="list" action="">
-      <button type="submit" class="btn btn-primary">List</button>
-    </form>
-    <ul class = "list-group" id="files_list">
-    </ul>
   </div>
   <div id="chat" class="well col-md-2">
     <ul id="messages" class="list-group"></ul>
@@ -116,7 +129,7 @@
     var li;
     $('#files_list').html("");
     for(var i = 0; i < msg.length; ++i){
-      li = $('<li class = \"list-group-item list-group-item-action\" >');
+      li = $('<li>');
       li.append("<button class=\"btn btn-default\" id="+msg[i].id+'>'+msg[i].name+'</button>');
       li.append("</li>");
       $('#files_list').append(li);
