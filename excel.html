@@ -32,6 +32,9 @@
           </form>
 
         </div>
+        <div class="col-md-1">
+          <button id="chatBox" class="btn btn-secondary">chat&#x25BC</button>
+        </div>
       </div>
       <div class="btn-group">
       </div>
@@ -57,8 +60,8 @@
     <form action="" class="input-group">
       <input id="m2" class="form-control" autocomplete="off" />
       <span class="input-group-btn">
-					<button class="btn btn-default">Send</button>
-				</span>
+        <button class="btn btn-default">Send</button>
+      </span>
     </form>
   </div>
 </body>
@@ -145,6 +148,9 @@
       for (var message in storedMsgs) {
           printMessage(storedMsgs[message]);
       }
+  });
+  $("#chatBox").click(function(){
+      $("#chat").toggle();
   });
   $('#chat > form').submit(function(){
       socket.emit('chat message', $('#m2').val());

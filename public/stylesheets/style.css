@@ -73,6 +73,14 @@ a:hover{
   padding-right:20pt;
 }
 
+.chatBox {
+    float: left;
+    color: black;
+    padding-top: 5pt;
+    padding-left:20pt;
+    padding-right:20pt;
+}
+
 
 .undoButton{
   color: white;
@@ -117,6 +125,16 @@ a:hover{
   border-radius: 5px;
 }
 
+.chatButton {
+    color: white;
+    background-color: grey;
+    border: 1pt solid black;
+    cursor: pointer;
+    padding: 5pt;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
 .slideThree {
   width: 70px;
   background: white;
@@ -154,7 +172,9 @@ a:hover{
 .navigation {
   list-style: none;
   margin: 0;
+
   background: white;
+
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -187,30 +207,32 @@ a:hover{
 
 #chat {
   background-color: #0962a1;
+  width: 300px;
   position: fixed;
-  wid
   bottom: 0;
   right: 0;
 }
 
 #messages {
-  min-height: 80vh;
+  min-height: 60vh;
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 80vh;
 }
 
 li.list-group-item {
-  color: black;
   word-wrap: break-word;
   border-radius: 20px;
   margin-top: 5px;
+  color: black;
 }
 li.list-group-item:first-child {
   border-radius: 20px;
+  color: black;
 }
 li.list-group-item:last-child {
   border-radius: 20px;
+  color: black;
 }
 
 /* The Overlay (background) */
@@ -233,8 +255,7 @@ li.list-group-item:last-child {
     color: black;
     border-radius: 5px;
     position: relative;
-    top: 10%; /* 25% from the top */
-    bottom: 50%;
+    top: 30%; /* 25% from the top */
     height: 20%;
     left: 20%;
     right:20%;
@@ -243,10 +264,15 @@ li.list-group-item:last-child {
     margin-top: 30%; /* 30px top margin to avoid conflict with the close button on smaller screens */
 }
 
-
 .overlay .closebtn {
     position: absolute;
     top: 20px;
     right: 45px;
     font-size: 60px;
+}
+
+#user {
+    font-size: large;
+    font-weight: bolder;
+    color: firebrick;
 }

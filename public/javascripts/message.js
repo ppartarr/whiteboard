@@ -5,6 +5,9 @@ socket.on('loadChat', function(storedMsgs){
         printMessage(storedMsgs[message]);
     }
 });
+$("#chatBox").click(function(){
+    $("#chat").toggle();
+});
 
 $('#message').submit(function(){
     var message = username + ": " + $('#m').val();

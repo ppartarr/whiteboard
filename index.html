@@ -37,18 +37,20 @@
 				<div class="download">
 					<button id="download" class="downloadButton">download</button>
 				</div>
-				<p>Logged in as: <span onclick="openNav()" id="user"></span></p>
 				<div class="undo">
 					<button id="undo" class="undoButton">undo</button>
 				</div>
-                                <div class="redo">
-                                        <button id="redo" class="redoButton">redo</button>
-                                </div>
-                                <div class="clear">
-                                        <button id="clear" class="clearButton">clear</button>
-                                </div>
-
+				<div class="redo">
+					<button id="redo" class="redoButton">redo</button>
+				</div>
+				<div class="clear">
+					<button id="clear" class="clearButton">clear</button>
+				</div>
+				<div class="chatBox">
+					<button id="chatBox" class="chatButton">chat&#x25BC</button>
+				</div>
 				<br style="clear:both;">
+				<p>Logged in as: <span onclick="openNav()" id="user"></span></p>
 			</div>
 		</div>
 	</nav>
@@ -72,9 +74,6 @@
 
 	<div id="cursors"></div>
 	<div class="col-md-12">
-		<!--<div class="col-md-10">-->
-			<!--<canvas id="draw" resize="true" keepalive="true"></canvas>-->
-		<!--</div>-->
 		<div id="chat" class="well col-md-2">
 			<ul id="messages" class="list-group"></ul>
 			<form action="" class="input-group" id="message">
