@@ -115,45 +115,6 @@ $(function(){
         }
     });
 
-    //chat
-    // var socket = io();
-
-    socket.on('loadChat', function(storedMsgs){
-        for (var message in storedMsgs) {
-            printMessage(storedMsgs[message]);
-        }
-    });
-    $('form').submit(function(){
-        socket.emit('chat message', $('#m').val());
-        $('#m').val('');
-        return false;
-    });
-    $('#redo').on("click", function(){
-	socket.emit('redo request');
-	return false;
-    });
-    $('#undo').on("click", function(){
-	socket.emit('undo request');
-	return false;
-    });
-    $('#clear').on("click", function(){
-	clear();
-	console.log("clear");
-	return false;
-    });
-
-    socket.on('chat message', function(msg){
-        printMessage(msg);
-    });
-
-    //printMessage
-    var printMessage = function(msg){
-        $('#messages').append($('<li class="list-group-item">').text(msg));
-        $('#messages').scrollTop($('#messages')[0].scrollHeight);
-    };
-
-
-
     download.addEventListener("click", function() {
         var canvas = document.getElementById("draw");
           var imgData = canvas.toDataURL();
@@ -162,6 +123,22 @@ $(function(){
           var download = document.getElementById('download');
 
           pdf.save("download.pdf");
+    });
+
+    $('#redo').on("click", function(){
+    socket.emit('redo request');
+    return false;
+    });
+
+    $('#undo').on("click", function(){
+    socket.emit('undo request');
+    return false;
+    });
+
+    $('#clear').on("click", function(){
+    clear();
+    console.log("clear");
+    return false;
     });
 
 

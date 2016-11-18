@@ -154,9 +154,7 @@ a:hover{
 .navigation {
   list-style: none;
   margin: 0;
-
   background: white;
-
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -190,6 +188,7 @@ a:hover{
 #chat {
   background-color: #0962a1;
   position: fixed;
+  wid
   bottom: 0;
   right: 0;
 }
@@ -202,6 +201,7 @@ a:hover{
 }
 
 li.list-group-item {
+  color: black;
   word-wrap: break-word;
   border-radius: 20px;
   margin-top: 5px;
@@ -233,7 +233,8 @@ li.list-group-item:last-child {
     color: black;
     border-radius: 5px;
     position: relative;
-    top: 30%; /* 25% from the top */
+    top: 10%; /* 25% from the top */
+    bottom: 50%;
     height: 20%;
     left: 20%;
     right:20%;

@@ -2,7 +2,6 @@
 <html>
 
 <head>
-	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" media="screen" />
 	<script src="/socket.io/socket.io.js"></script>
@@ -60,7 +59,7 @@
 			<br>
 			<h2>Please enter a username: </h2>
 			<br>
-			<form id="form_name" action="" class="input-grouponsubmit="closeNav()">
+			<form id="form_name" action="" class="input-group">
 				<input placeholder="Username" id="username" class="form-control" autocomplete="off" />
 				<span class="input-group-btn">
 					<button class="btn btn-default">Continue</button>
@@ -72,14 +71,13 @@
 
 
 	<div id="cursors"></div>
-	<canvas id="draw" resize="true" keepalive="true"></canvas>
 	<div class="col-md-12">
 		<!--<div class="col-md-10">-->
 			<!--<canvas id="draw" resize="true" keepalive="true"></canvas>-->
 		<!--</div>-->
 		<div id="chat" class="well col-md-2">
 			<ul id="messages" class="list-group"></ul>
-			<form action="" class="input-group">
+			<form action="" class="input-group" id="message">
 				<input id="m" class="form-control" autocomplete="off" />
 				<span class="input-group-btn">
 					<button class="btn btn-default">Send</button>
@@ -87,6 +85,8 @@
 			</form>
 		</div>
 	</div>
+	<canvas id="draw" resize="true" keepalive="true"></canvas>
+	<script src="javascripts/message.js"></script>
 	<script src="javascripts/paper.js"></script>
 	<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
 	<script type="text/paperscript" src="javascripts/draw.js" canvas="draw"></script>

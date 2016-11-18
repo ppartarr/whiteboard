@@ -1,4 +1,5 @@
 var storedMsgs = [];
+var names = [];
 
 var express = require('express'),
     app = express(),
@@ -76,7 +77,7 @@ io.on('connection', function (socket) {
       io.emit('chat message', msg);
   });
     socket.on('login', function(username){
-        console.log(username + "logged in");
+        names.push(username);
         io.emit('logged in', " ", username);
     });
 });
