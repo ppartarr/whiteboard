@@ -1,5 +1,4 @@
-var username;
-var names = [];
+var username = "";
 var socket = io();
 
 function openNav() {
@@ -9,6 +8,19 @@ function openNav() {
 function closeNav() {
     document.getElementById("myNav").style.width = "0%";
 }
+
+function isloggedin() {
+    socket.emit('getnames');
+}
+
+socket.on('returnnames', function(names){
+    for (name in names){
+        if (username == name){
+            return;
+        }
+    }
+    openNav();
+});
 
 $('#form_name').submit(function(){
     username = $('#username').val();
@@ -23,6 +35,5 @@ $('#form_name').submit(function(){
 });
 
 socket.on('logged in', function(username){
-    console.log('username' + "is logged in for good");
-    names.push(username);
+//    console.log(username + " is logged in for good");
 });
