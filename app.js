@@ -103,6 +103,8 @@ this.list = function(){
 }
 this.newSheet = function(){
   io.emit('message', gApi.getSheet());
+  console.log(gApi.getName());
+  io.emit('name', gApi.getName());
 };
 this.newRawSheet = function(){
   io.emit('rawsheet', gApi.getRawSheet());

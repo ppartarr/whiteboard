@@ -57,6 +57,12 @@ this.getList = function(){
 this.getSheet = function(){
   return spreadsheets.get(spreadID);
 }
+this.getName = function(){
+  headers = nameIdMap.get('tsvetan');
+  for(var i=0; i<headers.length; ++i){
+    if(headers[i].id == spreadID) return headers[i].name;
+  }
+}
 var spreadID = '1MFnKLbaG1ZKDtIOZu-S_xa03v-5kjDiJ10KCjxe4mwE';
 this.loadSheet = function(id){
   if(id){

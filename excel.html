@@ -21,7 +21,7 @@
     </div>
   </nav>
   <div class="container">
-    <h1> Welcome to Sheets </h1>
+    <h1 id ="welcome"> Welcome to Sheets </h1>
     <div class="btn-group">
       <form id="load" action="">
         <input id="m" autocomplete="off" /> <button type="submit" class="btn btn-default"> Load</button>
@@ -53,6 +53,7 @@
 
 
 <script>
+  var sheetName;
   var rawsheet;
   var currentCell;
   var rowLength;
@@ -106,6 +107,10 @@
   });
   socket.on('rawsheet', function(msg){
     rawsheet = msg;
+  });
+  socket.on('name', function(msg){
+    sheetName = msg;
+    $('#welcome').html("This is sheet: "+ msg);
   });
   socket.on('list', function(msg){
     var li;
