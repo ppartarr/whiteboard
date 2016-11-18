@@ -75,7 +75,10 @@ io.on('connection', function (socket) {
       storedMsgs.push(msg);
       io.emit('chat message', msg);
   });
-
+    socket.on('login', function(username){
+        console.log(username + "logged in");
+        io.emit('logged in', " ", username);
+    });
 });
 
 

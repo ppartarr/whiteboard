@@ -16,7 +16,7 @@ $(function(){
     var lastEmit = $.now();
 
 
-    function clear(){	
+    function clear(){
 	canvas[0].getContext('2d').clearRect(0,0,canvas[0].width,canvas[0].height);
 	socket.emit('clear');
     }
@@ -93,12 +93,12 @@ $(function(){
 
 
     socket.on('loadInitial', function(data){
-        canvas[0].getContext('2d').clearRect(0,0,canvas[0].width,canvas[0].height);	
+        canvas[0].getContext('2d').clearRect(0,0,canvas[0].width,canvas[0].height);
         var converted;
         if(data.x.length>0){
             for(var i = 0; i<data.x.length ; ++i){
                 if( data.blank[i] == true){
-	         console.log("undoing"); 
+	         console.log("undoing");
                  continue;
  		}
                 converted = {
@@ -140,8 +140,8 @@ $(function(){
 	clear();
 	console.log("clear");
 	return false;
-    });	
-    
+    });
+
     socket.on('chat message', function(msg){
         printMessage(msg);
     });
