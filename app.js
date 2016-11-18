@@ -78,8 +78,13 @@ io.on('connection', function (socket) {
   });
     socket.on('login', function(username){
         names.push(username);
-        io.emit('logged in', " ", username);
+        console.log(names);
+        io.emit('logged in', username);
     });
+  socket.on('getnames', function(){
+      console.log(names);
+      io.emit('returnnames', names);
+  });
 });
 
 
