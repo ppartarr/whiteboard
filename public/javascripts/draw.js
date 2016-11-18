@@ -15,6 +15,11 @@ $(function(){
     var socket = io();
     var lastEmit = $.now();
 
+
+    function clear(){	
+	canvas[0].getContext('2d').clearRect(0,0,canvas[0].width,canvas[0].height);
+	socket.emit('clear');
+    }
     // Drawing helper function=
     function drawLine(fromx, fromy, tox, toy, color, thickness, erase){
         if (erase){
@@ -73,8 +78,12 @@ $(function(){
     });
 
     // On mouse up
-    canvas.on('mouseup mouseleave', function(e) {
-        drawing = false;
+    canvas.on('mouseleave', function(e) {
+      drawing = false;
+    });
+    canvas.on('mouseup', function(e){
+      socket.emit('actionOver');
+      drawing = false;
     });
 
     // Keep users screen up to date with other users cursors & lines
@@ -84,9 +93,14 @@ $(function(){
 
 
     socket.on('loadInitial', function(data){
+        canvas[0].getContext('2d').clearRect(0,0,canvas[0].width,canvas[0].height);	
         var converted;
         if(data.x.length>0){
             for(var i = 0; i<data.x.length ; ++i){
+                if( data.blank[i] == true){
+	         console.log("undoing"); 
+                 continue;
+ 		}
                 converted = {
                         x:data.x[i],
                                             y:data.y[i],
@@ -114,6 +128,19 @@ $(function(){
         $('#m').val('');
         return false;
     });
+    $('#redo').on("click", function(){
+	socket.emit('redo request');
+	return false;
+    });
+    $('#undo').on("click", function(){
+	socket.emit('undo request');
+	return false;
+    });
+    $('#clear').on("click", function(){
+	clear();
+	console.log("clear");
+	return false;
+    });	
     
     socket.on('chat message', function(msg){
         printMessage(msg);

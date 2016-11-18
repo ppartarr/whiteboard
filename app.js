@@ -22,7 +22,20 @@ var initialCanvas = {
       color: [],
       thickness: [],
       erase: [],
+      blank: [],
 };
+
+var undoneCanvas = {
+      x: [],
+      y: [],
+      drawing: [],
+      id: [],
+      color: [],
+      thickness: [],
+      erase: [],
+      blank: [],
+};
+
 
 
 io.on('connection', function (socket) {
@@ -36,14 +49,39 @@ io.on('connection', function (socket) {
       initialCanvas.thickness.push(data.thickness);
       initialCanvas.erase.push(data.erase);
       initialCanvas.color.push(data.color);
+      initialCanvas.blank.push(false);
       socket.broadcast.emit( 'moving', data );
     });
+  socket.on('actionOver', function(){
+      initialCanvas.x.push(" ");
+      initialCanvas.y.push(" ");
+      initialCanvas.drawing.push(" ");
+      initialCanvas.id.push(" ");
+      initialCanvas.thickness.push(" ");
+      initialCanvas.erase.push(" ");
+      initialCanvas.color.push(" ");
+      initialCanvas.blank.push(true);
+    });
+  socket.on('clear', function(){
+      undoStack(true, loadCanvas);
+  });
+  socket.on('undo request', function(){
+      undoStack(false, loadCanvas);
+  });
+  socket.on('redo request', function(){
+      redoStack(loadCanvas);
+  });
   socket.on('chat message', function(msg){
       storedMsgs.push(msg);
       io.emit('chat message', msg);
   });
 
 });
+
+
+loadCanvas = function(){
+  io.emit('loadInitial', initialCanvas);
+}
 
 
 
@@ -106,3 +144,33 @@ io.on('connection', function(socket){
   socket.on('login', function(msg,username){
   });
 });
+
+function undoStack(clearAll, callback){
+  while(initialCanvas.x.length>0){
+	  undoneCanvas.x.push(initialCanvas.x.pop());
+          undoneCanvas.y.push(initialCanvas.y.pop());
+          undoneCanvas.id.push(initialCanvas.id.pop());
+          undoneCanvas.drawing.push(initialCanvas.drawing.pop());
+          undoneCanvas.blank.push(initialCanvas.blank.pop());
+          undoneCanvas.erase.push(initialCanvas.erase.pop());
+          undoneCanvas.thickness.push(initialCanvas.thickness.pop());
+          undoneCanvas.color.push(initialCanvas.color.pop());
+	  if(undoneCanvas.blank[undoneCanvas.blank.length-1] == true && clearAll==false ) break;
+  }
+  callback();
+}
+
+function redoStack(callback){
+  while(undoneCanvas.x.length>0){
+          initialCanvas.x.push(undoneCanvas.x.pop());
+          initialCanvas.y.push(undoneCanvas.y.pop());
+          initialCanvas.id.push(undoneCanvas.id.pop());
+          initialCanvas.drawing.push(undoneCanvas.drawing.pop());
+          initialCanvas.blank.push(undoneCanvas.blank.pop());
+          initialCanvas.erase.push(undoneCanvas.erase.pop());
+          initialCanvas.thickness.push(undoneCanvas.thickness.pop());
+          initialCanvas.color.push(undoneCanvas.color.pop());
+          if(initialCanvas.blank[initialCanvas.blank.length-1] == true) break;
+  }
+  callback();
+}

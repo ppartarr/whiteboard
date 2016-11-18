@@ -45,6 +45,67 @@ a:hover{
   padding-right: 20pt;
 }
 
+
+.redo{
+  float: left;
+  color: black;
+  padding-top: 5pt;
+  padding-left:20pt;
+  padding-right:20pt;
+}
+
+
+.undo{
+  float: left;
+  color: black;
+  padding-top: 5pt;
+  padding-left:20pt;
+  padding-right:20pt;
+}
+
+
+.clear{
+  float: left;
+  color: black;
+  padding-top: 5pt;
+  padding-left:20pt;
+  padding-right:20pt;
+}
+
+
+.undoButton{
+  color: white;
+  background-color: grey;
+  border: 1pt solid black;
+  cursor: pointer;
+  padding: 5pt;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+
+.redoButton{
+  color: white;
+  background-color: grey;
+  border: 1pt solid black;
+  cursor: pointer;
+  padding: 5pt;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+
+.clearButton{
+  color: white;
+  background-color: grey;
+  border: 1pt solid black;
+  cursor: pointer;
+  padding: 5pt;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+
 .downloadButton{
   color: white;
   background-color: grey;
