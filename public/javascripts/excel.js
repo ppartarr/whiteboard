@@ -6,13 +6,11 @@ var maxRows;
 var socket = io();
 
 $('#col').submit(function(){
-console.log("col");
-socket.emit("col", rowLength);
-return false;
+  socket.emit("col", rowLength);
+  return false;
 });
 $('#row').submit(function(){
-console.log("row");
-socket.emit('row', rowLength);
+  socket.emit('row', rowLength);
 return false;
 });
 $('#load').submit(function(){
@@ -20,7 +18,6 @@ socket.emit('update', $('#m').val(), currentCell);
 return false;
 });
 $('#list').submit(function(){
-alert("asd");
 socket.emit('list','list' );
 return false;
 });
@@ -29,18 +26,27 @@ var tb;
 var tr;
 var row;
 $('#spreadsheet').html("") ;
+tr = $('<tr>');
+tr.append("<td><input></input></td>");
 rowLength = 0;
 maxRows = msg.length;
 for(var i =0; i<msg.length;++i){
   if(rowLength < msg[i].length) rowLength = msg[i].length;
 }
+for(var i = 0; i<rowLength; ++i){
+  tr.append("<td><input id="+String.fromCharCode(65+parseInt(i), 10)+" value="+String.fromCharCode(65+parseInt(i), 10)+"\"></td>");
+  $('#spreadsheet').append(tr);
+}
 for (var i = 0; i < msg.length; ++i){
   tr = $('<tr>');
   row = msg[i];
+  tr.append("<td><input id="+(i+1)+" value="+(i+1)+"></td>");
   for(var j = 0; j < rowLength; ++j){
+
     if(j > (row.length-1)){
       row[j] = "";
     }
+    if(row[j] == " ") row[j] = "";
     tr.append("<td><input id="+String(i)+'-'+String(j)+" value="+row[j]+"></td>");
   }
   tr.append("</tr>");
@@ -49,6 +55,7 @@ for (var i = 0; i < msg.length; ++i){
 $('#spreadsheet > tbody > tr > td > input').on("click", function(){
   $('#m').focus();
   currentCell = $(this).attr('id').split("-");
+  if(rawsheet[currentCell[0]][currentCell[1]] == " ") rawsheet[currentCell[0]][currentCell[1]] = "";
   $('#m').val(rawsheet[currentCell[0]][currentCell[1]]);
 });
 });

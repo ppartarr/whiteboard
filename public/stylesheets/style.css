@@ -185,6 +185,28 @@ a:hover{
   justify-content: flex-start;
 }
 
+
+
+
+#spreadsheet tr:nth-child(1) {
+  color: blue;
+  border: 1px solid black;
+}
+
+#spreadsheet tr:nth-child(1) input {
+  text-align: center;
+}
+
+#spreadsheet tr td:nth-child(1){
+  color: blue;
+  border: 1px solid black;
+  width: 30px;
+}
+#spreadsheet tr td:nth-child(1) input {
+  text-align: center;
+  width: 30px;
+}
+
 .navigation a {
   text-decoration: none;
   display: block;

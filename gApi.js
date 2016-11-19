@@ -29,7 +29,6 @@ this.addRow = function(rowSize){
     row.push(" ");
   }
   rowLocation = spreadsheets.get(spreadID).length+1;
-  console.log(row, rowLocation);
   getJSON(fs, addRow);
 }
 this.addCol = function(rowSize){
@@ -38,7 +37,6 @@ this.addCol = function(rowSize){
     row.push(" ");
   }
   rowLocation = spreadsheets.get(spreadID).length;
-  console.log(row, rowLocation);
   getJSON(fs, addRow);
 }
 
