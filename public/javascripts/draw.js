@@ -14,7 +14,7 @@ $(function(){
     var prev = {}; // Previous coordinates container
     var socket = io();
     var lastEmit = $.now();
-
+    var firstPoint = false;
 
     function clear(){
 	canvas[0].getContext('2d').clearRect(0,0,canvas[0].width,canvas[0].height);
@@ -50,9 +50,18 @@ $(function(){
 
     // On mouse move
     canvas.on('mousemove', function(e) {
+        if (drawing)
+        {
+            e.pageX = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
+            e.pageY = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
+            drawLine(prev.x, prev.y, e.pageX, e.pageY, document.getElementById("colorPicker").value, document.getElementById("thickness").value, document.getElementById("erase").checked);
+            prev.x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
+            prev.y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
+        }
         // Emit the event to the server
         if ($.now() - lastEmit > 30)
         {
+
             socket.emit('mousemove', {
                 'x': e.pageX,
                 'y': e.pageY,
@@ -66,15 +75,7 @@ $(function(){
         }
 
         // Draw a line for the current user's movement
-        if (drawing)
-        {
-            e.pageX = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
-            e.pageY = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
-            drawLine(prev.x, prev.y, e.pageX, e.pageY, document.getElementById("colorPicker").value, document.getElementById("thickness").value, document.getElementById("erase").checked);
-            prev.x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
-            prev.y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
 
-        }
     });
 
     // On mouse up
@@ -96,16 +97,17 @@ $(function(){
         canvas[0].getContext('2d').clearRect(0,0,canvas[0].width,canvas[0].height);
         var converted;
         if(data.x.length>0){
+	  firstPoint = true;
             for(var i = 0; i<data.x.length ; ++i){
                 if( data.blank[i] == true){
-	         console.log("undoing");
+		 firstPoint = true;
                  continue;
  		}
                 converted = {
                         x:data.x[i],
-                                            y:data.y[i],
-                                            id:data.id[i],
-                                            drawing:data.drawing[i],
+                        y:data.y[i],
+                        id:data.id[i],
+                        drawing:data.drawing[i],
                         color:data.color[i],
                         thickness:data.thickness[i],
                         erase:data.erase[i],
@@ -126,7 +128,8 @@ $(function(){
     });
 
     $('#redo').on("click", function(){
-    socket.emit('redo request');
+    socket.emit('redo request');502
+
     return false;
     });
 
@@ -137,13 +140,12 @@ $(function(){
 
     $('#clear').on("click", function(){
     clear();
-    console.log("clear");
     return false;
     });
 
 
 function processData(data) {
-        console.log('moving');
+	if(data.drawing == true) console.log(firstPoint, data.y, clients[data.id].y);
 //         Create cursor
         if ( !(data.id in clients) )
         {
@@ -167,8 +169,16 @@ function processData(data) {
         if (data.drawing && clients[data.id])
         {
             // clients[data.id] holds the previous position of this user's mouse pointer
-            drawLine(clients[data.id].x, clients[data.id].y, data.x, data.y, data.color, data.thickness, data.erase);
-        }
+	  if(firstPoint){
+	      firstPoint = false;
+              console.log(data.y);
+              drawLine(data.x, data.y, data.x, data.y, data.color, data.thickness, data.erase);
+
+	  }
+	  else{
+              drawLine(clients[data.id].x, clients[data.id].y, data.x, data.y, data.color, data.thickness, data.erase);
+          }
+	}
 
 //         Save state
         clients[data.id] = data;

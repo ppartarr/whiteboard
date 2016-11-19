@@ -164,7 +164,10 @@ function undoStack(clearAll, callback){
           undoneCanvas.erase.push(initialCanvas.erase.pop());
           undoneCanvas.thickness.push(initialCanvas.thickness.pop());
           undoneCanvas.color.push(initialCanvas.color.pop());
-	  if(undoneCanvas.blank[undoneCanvas.blank.length-1] == true && clearAll==false ) break;
+	  if(undoneCanvas.blank[undoneCanvas.blank.length-1] == true){
+            if( clearAll==false ) break;
+            else undoneCanvas.blank[undoneCanvas.blank.length-1] = undefined;
+          }
   }
   callback();
 }
@@ -180,6 +183,9 @@ function redoStack(callback){
           initialCanvas.thickness.push(undoneCanvas.thickness.pop());
           initialCanvas.color.push(undoneCanvas.color.pop());
           if(initialCanvas.blank[initialCanvas.blank.length-1] == true) break;
+          if(initialCanvas.blank[initialCanvas.blank.length-1] == undefined){
+            initialCanvas.blank[initialCanvas.blank.length-1] = true;
+          }
   }
   callback();
 }
