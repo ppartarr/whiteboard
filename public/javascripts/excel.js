@@ -20,6 +20,7 @@ socket.emit('update', $('#m').val(), currentCell);
 return false;
 });
 $('#list').submit(function(){
+alert("asd");
 socket.emit('list','list' );
 return false;
 });
@@ -72,25 +73,28 @@ $('#files_list > li > button').on( "click", function(){
 });
 });
 
-//chat
-// var socket = io();
 
-socket.on('loadChat', function(storedMsgs){
-  for (var message in storedMsgs) {
-      printMessage(storedMsgs[message]);
-  }
-});
-$('#chat > form').submit(function(){
-  socket.emit('chat message', $('#m2').val());
-  $('#m2').val('');
-  return false;
-});
-socket.on('chat message', function(msg){
-  printMessage(msg);
-});
 
 //printMessage
 var printMessage = function(msg){
   $('#messages').append($('<li class="list-group-item">').text(msg));
   $('#messages').scrollTop($('#messages')[0].scrollHeight);
 };
+  socket.on('loadChat', function(storedMsgs){
+      for (var message in storedMsgs) {
+          printMessage(storedMsgs[message]);
+      }
+  });
+  $("#chatBox").click(function(){
+      $("#chat").toggle();
+  });
+  $('#chat > form').submit(function(){
+      socket.emit('chat message', $('#m2').val());
+      $('#m2').val('');
+      return false;
+  });
+  socket.on('chat message', function(msg){
+      printMessage(msg);
+  });
+
+
