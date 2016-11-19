@@ -59,9 +59,9 @@ $(function(){
             prev.y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
         }
         // Emit the event to the server
-        if ($.now() - lastEmit > 30)
+        if ($.now() - lastEmit > 4)
         {
-
+		if(drawing)
             socket.emit('mousemove', {
                 'x': e.pageX,
                 'y': e.pageY,
@@ -145,7 +145,6 @@ $(function(){
 
 
 function processData(data) {
-	if(data.drawing == true) console.log(firstPoint, data.y, clients[data.id].y);
 //         Create cursor
         if ( !(data.id in clients) )
         {

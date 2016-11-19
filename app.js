@@ -110,7 +110,6 @@ this.list = function(){
 }
 this.newSheet = function(){
   io.emit('message', gApi.getSheet());
-  console.log(gApi.getName());
   io.emit('name', gApi.getName());
 };
 this.newRawSheet = function(){
@@ -155,6 +154,14 @@ io.on('connection', function(socket){
 });
 
 function undoStack(clearAll, callback){
+	  undoneCanvas.x.push(initialCanvas.x.pop());
+          undoneCanvas.y.push(initialCanvas.y.pop());
+          undoneCanvas.id.push(initialCanvas.id.pop());
+          undoneCanvas.drawing.push(initialCanvas.drawing.pop());
+          undoneCanvas.blank.push(initialCanvas.blank.pop());
+          undoneCanvas.erase.push(initialCanvas.erase.pop());
+          undoneCanvas.thickness.push(initialCanvas.thickness.pop());
+          undoneCanvas.color.push(initialCanvas.color.pop());
   while(initialCanvas.x.length>0){
 	  undoneCanvas.x.push(initialCanvas.x.pop());
           undoneCanvas.y.push(initialCanvas.y.pop());
