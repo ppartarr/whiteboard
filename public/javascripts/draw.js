@@ -94,7 +94,7 @@ $(function(){
 
 
     socket.on('loadInitial', function(data){
-        canvas[0].getContext('2d').clearRect(0,0,canvas[0].width,canvas[0].height);
+    canvas[0].getContext('2d').clearRect(0,0,canvas[0].width,canvas[0].height);
         var converted;
         if(data.x.length>0){
 	  firstPoint = true;
@@ -146,23 +146,23 @@ $(function(){
 
 function processData(data) {
 //         Create cursor
-        if ( !(data.id in clients) )
-        {
-            cursors[data.id] = $('<div class="cursor">').appendTo('#cursors');
-        }
-
-        // Move cursor
-        cursors[data.id].css({
-            'left' : data.x,
-            'top' : data.y
-        });
-
-        // Set the starting point to where the user first touched
-        if (data.drawing && clients[data.id] && data.touch)
-        {
-            clients[data.id].x = data.startX;
-            clients[data.id].y = data.startY;
-        }
+//        if ( !(data.id in clients) )
+//        {
+//            cursors[data.id] = $('<div class="cursor">').appendTo('#cursors');
+//        }
+//
+//        // Move cursor
+//        cursors[data.id].css({
+//            'left' : data.x,
+//            'top' : data.y
+//        });
+//
+//        // Set the starting point to where the user first touched
+//        if (data.drawing && clients[data.id] && data.touch)
+//        {
+//            clients[data.id].x = data.startX;
+//            clients[data.id].y = data.startY;
+//        }
 
         // Show drawing
         if (data.drawing && clients[data.id])
@@ -179,9 +179,9 @@ function processData(data) {
           }
 	}
 
-//         Save state
-        clients[data.id] = data;
-        clients[data.id].updated = $.now();
+////         Save state
+//        clients[data.id] = data;
+//        clients[data.id].updated = $.now();
     }
 
 });

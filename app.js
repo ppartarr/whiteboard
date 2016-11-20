@@ -77,9 +77,11 @@ io.on('connection', function (socket) {
       io.emit('chat message', msg);
   });
     socket.on('login', function(username){
+        console.log(names);
         names.push(username);
-        io.emit('logged in', username);
+        io.emit('returnnames', names);
     });
+
   socket.on('getnames', function(){
       io.emit('returnnames', names);
   });
