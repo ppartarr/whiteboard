@@ -4,6 +4,8 @@ body {
   display:inline;
 }
 
+
+
 a:hover{
   color:red;
 }
@@ -134,6 +136,11 @@ a:hover{
 .slideThree {
   width: 70px;
   background: white;
+}
+
+#error {
+    color:red;
+    font-style: italic;
 }
 
 #draw {

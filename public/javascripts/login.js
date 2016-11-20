@@ -22,12 +22,9 @@ function isloggedin() {
     socket.emit('getnames');
     username = sessionStorage.getItem("username");
     names = sessionStorage.getObject("names");
-    //alert("names: " + names + "\nusername: " + username);
     if (names != null && username != null){
         for (var i=0; i<names.length; i++){
-        //alert(typeof username + username + " " + typeof names[i] + names[i]);
             if (username == names[i]){
-                //alert("working" + username);
                 $('#user').text(username);
                 return false;
             }
@@ -42,10 +39,20 @@ socket.on('returnnames', function(names){
 
 $('#form_name').submit(function(){
     username = $('#username').val();
+    names = sessionStorage.getObject("names");
     if (username == ""){
-        alert("Username cannot be empty!");
+        $("#error").text("Username cannot be empty");
         return false;
     }
+    if(names != null){
+        for (var i=0; i<names.length; i++){
+            if (username == names[i]){
+                $("#error").text("Username is already taken");
+                return false;
+            }
+        }
+    }
+    $("#error").text('');
     $('#user').text(username);
     socket.emit('login', username);
     closeNav();

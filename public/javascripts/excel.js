@@ -14,7 +14,7 @@ $('#row').submit(function(){
 return false;
 });
 $('#load').submit(function(){
-socket.emit('update', $('#m').val(), currentCell);
+socket.emit('update', $('#n').val(), currentCell);
 return false;
 });
 $('#list').submit(function(){
@@ -53,10 +53,10 @@ for (var i = 0; i < msg.length; ++i){
   $('#spreadsheet').append(tr);
 }
 $('#spreadsheet > tbody > tr > td > input').on("click", function(){
-  $('#m').focus();
+  $('#n').focus();
   currentCell = $(this).attr('id').split("-");
   if(rawsheet[currentCell[0]][currentCell[1]] == " ") rawsheet[currentCell[0]][currentCell[1]] = "";
-  $('#m').val(rawsheet[currentCell[0]][currentCell[1]]);
+  $('#n').val(rawsheet[currentCell[0]][currentCell[1]]);
 });
 });
 socket.on('rawsheet', function(msg){
