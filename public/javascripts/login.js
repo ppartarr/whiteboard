@@ -26,6 +26,7 @@ function isloggedin() {
         for (var i=0; i<names.length; i++){
             if (username == names[i]){
                 $('#user').text(username);
+                $('#close').css('visibility', 'visible');
                 return false;
             }
         }
@@ -52,6 +53,7 @@ $('#form_name').submit(function(){
             }
         }
     }
+    $('#close').css('visibility', 'visible');
     $("#error").text('');
     $('#user').text(username);
     socket.emit('login', username);

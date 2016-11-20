@@ -25,7 +25,6 @@
 					<input id="colorPicker" type="color">
 
 				</div>
-<script src="javascripts/message.js"></script>
 				<div class="thickness">
 					<p>thickness</p>
 					<input id="thickness" class="slideTwo" type="range" min="1" max="30">
@@ -50,14 +49,15 @@
 				<div class="chatBox">
 					<button id="chatBox" class="chatButton">chat&#x25BC</button>
 				</div>
-				<br style="clear:both;">
 				<p>Logged in as: <span onclick="openNav()" id="user"></span></p>
+				<br style="clear:both;">
 			</div>
 		</div>
 	</nav>
 
 	<!-- Login overlay -->
 	<div id="myNav" class="overlay">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" id="close">&times;</a>
 		<div class="col-md-10 overlay-content">
 			<br>
 			<h2>Please enter a username: </h2>

@@ -34,7 +34,9 @@
         <div class="col-md-1">
           <button id="chatBox" class="btn btn-secondary">chat&#x25BC</button>
         </div>
-        <p>Logged in as: <span onclick="openNav()" id="user"></span></p>
+        <div>
+          <p>Logged in as: <span onclick="openNav()" id="user"></span></p>
+        </div>
       </div>
       <div class="btn-group">
       </div>
@@ -58,6 +60,7 @@
 
   <!-- Login overlay -->
   <div id="myNav" class="overlay">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" id="close">&times;</a>
     <div class="col-md-10 overlay-content">
       <br>
       <h2>Please enter a username: </h2>
@@ -68,6 +71,7 @@
 					<button class="btn btn-default">Continue</button>
 				</span>
       </form>
+      <p id="error"></p>
     </div>
   </div>
 
