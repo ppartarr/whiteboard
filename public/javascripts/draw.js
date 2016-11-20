@@ -97,7 +97,7 @@ $(function(){
 
 
     socket.on('loadInitial', function(data){
-        canvas[0].getContext('2d').clearRect(0,0,canvas[0].width,canvas[0].height);
+    canvas[0].getContext('2d').clearRect(0,0,canvas[0].width,canvas[0].height);
         var converted;
         if(data.x.length>0){
 	  firstPoint = true;

@@ -62,14 +62,15 @@
 				<div class="chatBox">
 					<button id="chatBox" class="chatButton">chat&#x25BC</button>
 				</div>
-				<br style="clear:both;">
 				<p>Logged in as: <span onclick="openNav()" id="user"></span></p>
+				<br style="clear:both;">
 			</div>
 		</div>
 	</nav>
 
-	<!-- Top fucking overlay -->
+	<!-- Login overlay -->
 	<div id="myNav" class="overlay">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" id="close">&times;</a>
 		<div class="col-md-10 overlay-content">
 			<br>
 			<h2>Please enter a username: </h2>
@@ -80,6 +81,7 @@
 					<button class="btn btn-default">Continue</button>
 				</span>
 			</form>
+			<p id="error"></p>
 		</div>
 	</div>
 	<script src="javascripts/login.js"></script>
