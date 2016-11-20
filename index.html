@@ -30,8 +30,21 @@
 					<input id="thickness" class="slideTwo" type="range" min="1" max="30">
 				</div>
 				<div class="erase">
-					<p>erase</p>
-					<input id="erase" type="checkbox">
+					<p></p>
+
+					<script>
+					window.globals = {erase:true};				
+					function setErase(){
+						console.log("here");
+						window.globals.erase = !window.globals.erase;
+					}
+					
+					</script>
+					
+					<button type="submit" class="btn btn-primary" onclick="setErase()">
+					  <span class="glyphicon glyphicon-erase"></span>
+					</button>
+					
 				</div>
 				<div class="download">
 					<button id="download" class="downloadButton">download</button>

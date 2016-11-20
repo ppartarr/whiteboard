@@ -38,7 +38,6 @@ var undoneCanvas = {
 };
 
 
-
 io.on('connection', function (socket) {
   socket.emit('loadInitial', initialCanvas);
   socket.emit('loadChat', storedMsgs);

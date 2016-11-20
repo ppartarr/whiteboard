@@ -15,15 +15,17 @@ $(function(){
     var socket = io();
     var lastEmit = $.now();
     var firstPoint = false;
+    var erase = false;
 
     function clear(){
 	canvas[0].getContext('2d').clearRect(0,0,canvas[0].width,canvas[0].height);
 	socket.emit('clear');
     }
     // Drawing helper function=
-    function drawLine(fromx, fromy, tox, toy, color, thickness, erase){
+    function drawLine(fromx, fromy, tox, toy, color, thickness){
+	var erase = globals.erase;
         if (erase){
-          ctx.lineWidth = 20;
+          ctx.lineWidth = thickness;
           ctx.strokeStyle = "white";
         }
         else{
@@ -37,6 +39,8 @@ $(function(){
         ctx.lineTo(tox, toy);
         ctx.stroke();
     }
+
+
 
     // On mouse down
     canvas.on('mousedown', function(e) {
@@ -54,7 +58,7 @@ $(function(){
         {
             e.pageX = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
             e.pageY = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
-            drawLine(prev.x, prev.y, e.pageX, e.pageY, document.getElementById("colorPicker").value, document.getElementById("thickness").value, document.getElementById("erase").checked);
+            drawLine(prev.x, prev.y, e.pageX, e.pageY, document.getElementById("colorPicker").value, document.getElementById("thickness").value);
             prev.x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
             prev.y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
         }
@@ -68,8 +72,7 @@ $(function(){
                 'drawing': drawing,
                 'id': id,
                 'color': document.getElementById("colorPicker").value,
-                'thickness': document.getElementById("thickness").value,
-                'erase' : document.getElementById("erase").checked
+                'thickness': document.getElementById("thickness").value
             });
             lastEmit = $.now();
         }
@@ -171,11 +174,11 @@ function processData(data) {
 	  if(firstPoint){
 	      firstPoint = false;
               console.log(data.y);
-              drawLine(data.x, data.y, data.x, data.y, data.color, data.thickness, data.erase);
+              drawLine(data.x, data.y, data.x, data.y, data.color, data.thickness);
 
 	  }
 	  else{
-              drawLine(clients[data.id].x, clients[data.id].y, data.x, data.y, data.color, data.thickness, data.erase);
+              drawLine(clients[data.id].x, clients[data.id].y, data.x, data.y, data.color, data.thickness);
           }
 	}
 
