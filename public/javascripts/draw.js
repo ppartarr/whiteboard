@@ -17,11 +17,11 @@ $(function(){
     var firstPoint = false;
     var erase = false;
 
-    $('#thickness').slider({
+    /*$('#thickness').slider({
     	formatter: function(value) {
     		return 'Current value: ' + line_thickness;
     	}
-    });
+    });*/
 
     function clear(){
 	canvas[0].getContext('2d').clearRect(0,0,canvas[0].width,canvas[0].height);
