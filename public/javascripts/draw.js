@@ -28,8 +28,8 @@ $(function(){
 	socket.emit('clear');
     }
     // Drawing helper function=
-    function drawLine(fromx, fromy, tox, toy, color, thickness){
-	var erase = globals.erase;
+    function drawLine(fromx, fromy, tox, toy, color, thickness, erase){
+	//var erase = globals.erase;
         if (erase){
           ctx.lineWidth = thickness;
           ctx.strokeStyle = "white";
@@ -50,11 +50,13 @@ $(function(){
 
     // On mouse down
     canvas.on('mousedown', function(e) {
-        e.preventDefault();
-        drawing = true;
-        canoffset = $(canvas).offset();
-        prev.x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
-        prev.y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
+	if(e.which == 1){
+        	e.preventDefault();
+        	drawing = true;
+        	canoffset = $(canvas).offset();
+        	prev.x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
+        	prev.y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
+	}
     });
 
 
@@ -64,7 +66,7 @@ $(function(){
         {
             e.pageX = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
             e.pageY = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
-            drawLine(prev.x, prev.y, e.pageX, e.pageY, document.getElementById("colorPicker").value, document.getElementById("thickness").value);
+            drawLine(prev.x, prev.y, e.pageX, e.pageY, document.getElementById("colorPicker").value, document.getElementById("thickness").value, globals.erase);
             prev.x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
             prev.y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
         }
@@ -78,7 +80,8 @@ $(function(){
                 'drawing': drawing,
                 'id': id,
                 'color': document.getElementById("colorPicker").value,
-                'thickness': document.getElementById("thickness").value
+                'thickness': document.getElementById("thickness").value,
+		'erase': globals.erase,
             });
             lastEmit = $.now();
         }
@@ -180,11 +183,11 @@ function processData(data) {
 	  if(firstPoint){
 	      firstPoint = false;
               console.log(data.y);
-              drawLine(data.x, data.y, data.x, data.y, data.color, data.thickness);
+              drawLine(data.x, data.y, data.x, data.y, data.color, data.thickness, data.erase);
 
 	  }
 	  else{
-              drawLine(clients[data.id].x, clients[data.id].y, data.x, data.y, data.color, data.thickness);
+              drawLine(clients[data.id].x, clients[data.id].y, data.x, data.y, data.color, data.thickness, data.erase);
           }
 	}
 
