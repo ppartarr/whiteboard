@@ -13,6 +13,7 @@
     "google-auth-library": "~0.9.9",
     "googleapis": "~14.2.0",
     "hashmap": "~2.0.6",
-    "q": "^1.4.1"
+    "q": "^1.4.1",
+    "bootstrap-slider": "~9.4.1"
   }
 }

@@ -3,6 +3,7 @@
 
 <head>
 	<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-slider.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" media="screen" />
 	<script src="/socket.io/socket.io.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -33,30 +34,44 @@
 					<p></p>
 
 					<script>
-					window.globals = {erase:true};				
+					window.globals = {erase:false};
 					function setErase(){
+					    if (window.globals.erase){
+					        $("#erase").css("display", "block");
+					        $("#pencil").css("display", "none");
+						} else {
+						    $("#erase").css("display", "none");
+					        $("#pencil").css("display", "block");
+						}
 						console.log("here");
 						window.globals.erase = !window.globals.erase;
 					}
 					
 					</script>
 					
-					<button type="submit" class="btn btn-primary" onclick="setErase()">
-					  <span class="glyphicon glyphicon-erase"></span>
+					<button type="submit" class="btn btn-default" onclick="setErase()" id="rubber">
+					  <span class="glyphicon glyphicon-erase" id="erase" data-toggle="button"></span>
+                        <span class="glyphicon glyphicon-pencil" style="display: none;" id="pencil"></span>
 					</button>
 					
 				</div>
 				<div class="download">
-					<button id="download" class="downloadButton">download</button>
+					<button id="download" class="btn btn-default">
+                        <span class="glyphicon glyphicon-download-alt"></span>
+                    </button>
 				</div>
 				<div class="undo">
-					<button id="undo" class="undoButton">undo</button>
+					<button id="undo" class="btn btn-default">
+                        <span class="glyphicon glyphicon-arrow-left"></span>
+                    </button>
 				</div>
 				<div class="clear">
 					<button id="clear" class="clearButton">undo all</button>
 				</div>
 				<div class="redo">
-					<button id="redo" class="redoButton">redo</button>
+					<button id="redo" class="btn btn-default">
+                        <span class="glyphicon glyphicon-arrow-right"></span>
+                    </button>
 				</div>
 
 				<div class="chatBox">
@@ -102,6 +117,7 @@
 	<canvas id="draw" resize="true" keepalive="true"></canvas>
 	<script src="javascripts/message.js"></script>
 	<script src="javascripts/paper.js"></script>
+	<script src="javascripts/bootstrap-slider.js"></script>
 	<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
 	<script type="text/paperscript" src="javascripts/draw.js" canvas="draw"></script>
 </body>

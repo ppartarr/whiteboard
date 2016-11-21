@@ -301,3 +301,7 @@ li.list-group-item:last-child {
     font-weight: bolder;
     color: firebrick;
 }
+
+#ex1Slider .slider-selection {
+	background: #BABABA;
+}
