@@ -77,6 +77,7 @@ for(var i = 0; i < msg.length; ++i){
 }
 $('#files_list > li > button').on( "click", function(){
   socket.emit('change_to_id', $(this).attr('id'));
+  $('#files_list').html("");
 });
 });
 
