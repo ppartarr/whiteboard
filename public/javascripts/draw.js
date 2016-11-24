@@ -56,6 +56,17 @@ $(function(){
         	canoffset = $(canvas).offset();
         	prev.x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
         	prev.y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
+                e.pageX = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
+                e.pageY = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
+            socket.emit('mousemove', {
+                'x': e.pageX,
+                'y': e.pageY,
+                'drawing': false,
+                'id': id,
+                'color': document.getElementById("colorPicker").value,
+                'thickness': document.getElementById("thickness").value,
+		'erase': globals.erase,
+            });
 	}
     });
 
