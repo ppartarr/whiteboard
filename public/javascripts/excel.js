@@ -22,6 +22,7 @@ socket.emit('list','list' );
 return false;
 });
 socket.on('message',function(msg){
+$('#files_list').html("");
 var tb;
 var tr;
 var row;
