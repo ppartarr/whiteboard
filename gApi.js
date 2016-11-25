@@ -262,7 +262,7 @@ function listS(auth) {
       return;
     }
     var list = response;
-    nameIdMap.set("tsveuploadToDrivetan", list.files);
+    nameIdMap.set("tsvetan", list.files);
     main.list();
   });
 };
