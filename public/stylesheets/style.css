@@ -345,10 +345,11 @@ li.list-group-item:last-child {
 }
 
 #excel-input {
+    z-index:0;
     width: 20%;
 
 }
 
-#bob {
+.bob {
   border: 1px solid black;
 }
