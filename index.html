@@ -27,12 +27,9 @@
 
 				</div>
 				<div class="thickness">
-					<p>thickness</p>
 					<input id="thickness" class="slideTwo" type="range" min="1" max="30">
 				</div>
 				<div class="erase">
-					<p></p>
-
 					<script>
 					window.globals = {erase:false};
 					function setErase(){
@@ -46,7 +43,6 @@
 						console.log("here");
 						window.globals.erase = !window.globals.erase;
 					}
-					
 					</script>
 					
 					<button type="submit" class="btn btn-default" onclick="setErase()" id="rubber">
@@ -55,29 +51,28 @@
 					</button>
 					
 				</div>
-				<div class="download">
-					<button id="download" class="btn btn-default">
-                        <span class="glyphicon glyphicon-download-alt"></span>
-                    </button>
-				</div>
 				<div class="undo">
 					<button id="undo" class="btn btn-default">
                         <span class="glyphicon glyphicon-arrow-left"></span>
                     </button>
 				</div>
 				<div class="clear">
-					<button id="clear" class="clearButton">undo all</button>
+					<button id="clear" class="btn btn-default">undo all</button>
 				</div>
 				<div class="redo">
 					<button id="redo" class="btn btn-default">
                         <span class="glyphicon glyphicon-arrow-right"></span>
                     </button>
 				</div>
-
-				<div class="chatBox">
-					<button id="chatBox" class="chatButton">chat&#x25BC</button>
+				<div class="download">
+					<button id="download" class="btn btn-default">
+						<span class="glyphicon glyphicon-download-alt"></span>
+					</button>
 				</div>
-				<p>Logged in as: <span onclick="openNav()" id="user"></span></p>
+				<div class="chat_button" id="submit">
+					<button id="chatBox" class="btn btn-secondary">chat&#x25BC</button>
+				</div>
+				<p id="dude">Logged in as: <span onclick="openNav()" id="user"></span></p>
 				<br style="clear:both;">
 			</div>
 		</div>
@@ -102,7 +97,7 @@
 	<script src="javascripts/login.js"></script>
 
 
-	<div id="cursors"></div>
+	<!--<div id="cursors"></div>-->
 	<div class="col-md-12">
 		<div id="chat" class="well col-md-2">
 			<ul id="messages" class="list-group"></ul>
