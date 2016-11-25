@@ -148,6 +148,7 @@ body {
   border-radius: 5px;
 }
 
+
 .downloadButton{
   color: white;
   background-color: grey;
@@ -270,7 +271,8 @@ body {
 }
 
 #chat {
-  width:300px;
+  /*height:80vh;*/
+  /*width:20vh;*/
   background-color: #0962f2;
   position: fixed;
   bottom: 0;
@@ -341,8 +343,4 @@ li.list-group-item:last-child {
 
 #ex1Slider .slider-selection {
 	background: #BABABA;
-}
-
-#n {
-    position: relative;
 }
