@@ -36,7 +36,7 @@ var undoneCanvas = {
       erase: [],
       blank: [],
 };
-
+var isInitialSheet = false;
 
 io.on('connection', function (socket) {
   socket.emit('loadInitial', initialCanvas);
@@ -122,7 +122,11 @@ app.get('/excel.html', function(req, res){
 
 
 io.on('connection', function(socket){
+  if(isInitialSheet){
+    gApi.loadSheet();
+  }
   socket.on('message', function(msg){
+    isInitialSheet = true;
     gApi.loadSheet();
   });
   socket.on('row', function(msg){
@@ -135,6 +139,7 @@ io.on('connection', function(socket){
     gApi.listSheet();
   });
   socket.on('change_to_id', function(msg){
+    isInitialSheet = true;
     gApi.loadSheet(msg);
   });
   socket.on('update', function(value, address){
