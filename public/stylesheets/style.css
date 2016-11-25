@@ -269,8 +269,8 @@ body {
 }
 
 #chat {
-  height:80%;
-  width:20%;
+  /*height:80vh;*/
+  /*width:20vh;*/
   background-color: #0962f2;
   position: fixed;
   bottom: 0;
@@ -284,7 +284,7 @@ body {
 }
 
 #messages {
-  min-height: 60vh;
+  min-height: 80vh;
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 80vh;
