@@ -148,7 +148,6 @@ body {
   border-radius: 5px;
 }
 
-
 .downloadButton{
   color: white;
   background-color: grey;
@@ -243,9 +242,11 @@ body {
   width: 30px;
 }
 
-#spreadsheet {
-    width: 300px;
-    border: 5px solid red;
+#excel_table {
+    position: relative;
+    width: 80%;
+    height: 50%;
+
 }
 
 .navigation a {
@@ -269,8 +270,7 @@ body {
 }
 
 #chat {
-  height:80%;
-  width:20%;
+  width:300px;
   background-color: #0962f2;
   position: fixed;
   bottom: 0;
@@ -341,4 +341,8 @@ li.list-group-item:last-child {
 
 #ex1Slider .slider-selection {
 	background: #BABABA;
+}
+
+#n {
+    position: relative;
 }

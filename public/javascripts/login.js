@@ -12,6 +12,7 @@ Storage.prototype.getObject = function(key) {
 
 function openNav() {
     document.getElementById("myNav").style.width = "100%";
+    $('#username').focus();
 }
 
 function closeNav() {

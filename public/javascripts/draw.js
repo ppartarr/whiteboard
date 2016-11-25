@@ -123,9 +123,9 @@ $(function(){
 	  firstPoint = true;
             for(var i = 0; i<data.x.length ; ++i){
                 if( data.blank[i] == true){
-		 firstPoint = true;
-                 continue;
- 		}
+		            firstPoint = true;
+                    continue;
+ 		        }
                 converted = {
                         x:data.x[i],
                         y:data.y[i],

@@ -20,21 +20,21 @@
       <div class="collapse navbar-collapse">
         <div class="excelb">
             <form id="row">
-              <button type="submit" class="btn btn-secondary"> New Row</button>
+              <button type="submit" class="btn btn-default"> New Row</button>
             </form>
           </div>
           <div class="excelb">
             <form id="col">
-              <button type="submit" class="btn btn-secondary"> New Col</button>
+              <button type="submit" class="btn btn-default"> New Col</button>
             </form>
           </div>
           <div class="excelb">
             <form id="list" action="">
-              <button type="submit" class="btn btn-secondary">List</button>
+              <button type="submit" class="btn btn-default">List</button>
             </form>
           </div>
           <div class="chat_button">
-            <button id="chatBox" class="btn btn-secondary">chat&#x25BC</button>
+            <button id="chatBox" class="btn btn-default">chat&#x25BC</button>
           </div>
             <p id="dude">Logged in as: <span onclick="openNav()" id="user"></span></p>
         </div>
@@ -42,20 +42,22 @@
       <div class="btn-group">
       </div>
   </nav>
+
   <div class="container-fluid">
     <h1 id="welcome"> Welcome to Sheets </h1>
     <div class="btn-group">
-      <div class="col-md-4">
-        <form id="load" action="">
-          <input id="n" autocomplete="off" /> <button type="submit" class="btn btn-primary"> Enter</button>
+        <form action="" class="input-group">
+          <input autocomplete="off" placeholder="cell content" />
+            <span class ="input-group-button">
+              <button type="submit" class="btn btn-default"> Enter</button>
+            </span>
         </form>
-      </div>
       <div class="pull-right">
         <ul class="list-group" id="files_list" style = "list-style: none">
         </ul>
       </div>
     </div>
-    <div style="overflow-x:auto; overflow-y:auto">
+    <div style="overflow-x:auto; overflow-y:auto;" id="excel_table">
       <table id="spreadsheet"> </table>
     </div>
   </div>
