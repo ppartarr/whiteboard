@@ -46,15 +46,14 @@
   <div class="container-fluid">
     <h1 id="welcome"> Welcome to Sheets </h1>
     <div class="btn-group">
-        <form action="" class="input-group">
-          <input autocomplete="off" placeholder="cell content" class="form_control" />
-            <span class="input-group-button">
+        <form action="" class="input-group" id="excel-input">
+          <input autocomplete="off" placeholder="cell content" class="form-control" />
+            <span class="input-group-btn">
               <button type="submit" class="btn btn-default"> Enter</button>
             </span>
         </form>
       <div class="pull-right">
-        <ul class="list-group" id="files_list" style = "list-style: none">
-        </ul>
+        <ul class="list-group" id="files_list" style="list-style: none"></ul>
       </div>
     </div>
     <div style="overflow-x:auto; overflow-y:auto;" id="excel_table">
