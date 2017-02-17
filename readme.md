@@ -1,10 +1,13 @@
-This is the first version of the readme for the push
+## whiteboard
 
-- To run whiteboard -> 
-  1. navigate to whiteboard directory
-  2. run npm install 
-  3. nodejs app
-- To run ExcelFiles ->
-  1. navigate to ExcelFiles directory
-  2. run npm install
-  3. npm start
+This is an interactive whiteboard with shared excell sheets and a chat functionality.
+
+## Prerequistes
+
+To run this app you must have node.js installed.
+
+## To run the app
+
+- cd whiteboard
+- npm install 
+- npm start
